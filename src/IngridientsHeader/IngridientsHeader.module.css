@@ -1,4 +1,14 @@
-.navigation {
+.ingridients__navigation {
   display: flex;
   justify-content: space-between;
+}
+
+.ingridients__header {
+    font-family: JetBrains Mono;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
 }

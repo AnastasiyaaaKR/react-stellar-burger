@@ -1,0 +1,32 @@
+.ingridient__section {
+  max-width: 600px;
+}
+
+.ingridient__wrapper {
+  display: flex;
+}
+
+.ingridient {
+  position: relative;
+  max-width: 240px;
+}
+
+.ingridient__cost{
+  max-width: 272px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ingridient__costText {
+  margin: 0;
+  padding: 8px 0;
+}
+
+.ingridient__text {
+  max-width: 272px;
+  text-align: center;
+  margin: 0;
+  text-wrap: wrap;
+}

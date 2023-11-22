@@ -10,7 +10,7 @@ const Ingridients = () => {
       <Sauces />
       <Fillings />
     </div>
-  )
-}
+  )}
+
 
 export default Ingridients
