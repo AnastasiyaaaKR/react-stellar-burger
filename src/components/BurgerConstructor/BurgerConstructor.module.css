@@ -1,9 +1,41 @@
 .burger__wrapper {
+  max-width: 600px;
+  height: 912px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 568px;
-  height: 80px;
-  margin-top: 100px;
+  margin-top: 80px;
   text-wrap: wrap;
+  margin-left: 16px;
+}
+
+.ingridients__wrapper {
+  height: 467px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.order__wrapper {
+  display: flex;
+  margin-left: 210px;
+  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.icon__wrapper {
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+.ConstructorElement__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ConstructorElement{
+  background-color: #1C1C21;
+  width: 568px;
+  margin-bottom: 16px;
 }

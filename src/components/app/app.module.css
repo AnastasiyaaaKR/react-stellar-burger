@@ -1,6 +1,7 @@
 .app {
-  height: 100vh;
-  max-width: 1280px;
+  max-width: 2000px;
   background-color: #131316;
   color: #f2f2f3;
+  box-sizing: border-box;
+  margin: 40px;
 }

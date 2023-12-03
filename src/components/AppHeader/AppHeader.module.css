@@ -15,7 +15,7 @@
   height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .icon__wrapper {
@@ -23,6 +23,10 @@
   text-decoration: none;
 }
 
-.icon {
+.link__wrapper {
+  display: flex;
+}
 
+.link_active {
+  color: #f2f2f3;
 }

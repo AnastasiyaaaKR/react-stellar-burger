@@ -1,0 +1,23 @@
+.ingridient__wpapper {
+  max-width: 240px;
+  position: relative;
+  cursor: pointer;
+}
+
+.ingridient__cost {
+  max-width: 272px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ingridient__costText {
+  padding: 8px 0;
+}
+
+.ingridient__text {
+  font-size: 16px;
+  text-align: center;
+  text-wrap: wrap;
+}
