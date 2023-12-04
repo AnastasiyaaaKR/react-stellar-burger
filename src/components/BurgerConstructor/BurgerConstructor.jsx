@@ -3,19 +3,22 @@ import {ConstructorElement} from '@ya.praktikum/react-developer-burger-ui-compon
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import Bun from '../../images/done.png'
 import styles from "./BurgerConstructor.module.css";
 
 
 const BurgerConstructor = ({ingredients, showModal}) => {
-  const burger = {
-    bun: { name: 'Краторная булка N-200i (верх)', icon: Bun, price: 20 },
-    ingredients:[
 
-    ]
+  const burger = {
+    bun: ingredients.find((item) => {
+      return item.type === 'bun';
+    }),
+    ingredients: ingredients.filter((item) => {
+      return item.type !== 'bun';
+    })
   }
   
-  return (
+  if(burger.bun) {
+    return (
      <div className={`text text_type_main-small ${styles.burger__wrapper}`}>
         <div className='ml-8'>
           <ConstructorElement
@@ -24,13 +27,12 @@ const BurgerConstructor = ({ingredients, showModal}) => {
           isLocked={true}
           text={burger.bun.name}
           price={burger.bun.price}
-          thumbnail={burger.bun.icon}
+          thumbnail={burger.bun.image}
         />
         </div>
         <div className={`${styles.ingridients__wrapper} custom-scroll`}>
           {
-            ingredients &&
-            ingredients.map((ingredient)=>(
+            burger.ingredients.map((ingredient)=>(
               <div className={styles.ConstructorElement__wrapper} key={ingredient._id}>
                 <div className={styles.icon__wrapper}>
                   <DragIcon type="primary" />
@@ -53,7 +55,7 @@ const BurgerConstructor = ({ingredients, showModal}) => {
             isLocked={true}
             text={burger.bun.name}
             price={burger.bun.price}
-            thumbnail={burger.bun.icon}
+            thumbnail={burger.bun.image}
           />
         </div>
         <div className={styles.order__wrapper}>
@@ -69,6 +71,7 @@ const BurgerConstructor = ({ingredients, showModal}) => {
         </div>
       </div>
     )
+  } return null
 }
 
 export default BurgerConstructor

@@ -4,8 +4,17 @@ import styles from "./Modal.module.css";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const Modal = ({closeModal, children, title}) => {
+
+  function closeByEsc(evt) {
+    if (evt.key === 'Escape') {
+      closeModal();
+    }
+}
+
+  document.addEventListener("keydown", closeByEsc);
+
   return (
-    <ModalOverlay>
+    <ModalOverlay closeModal={closeModal}>
       <div className={`${styles.modal__window} pt-10 pb-15`}>
         <h2 className={`${styles.modal__header} text text_type_main-large pl-40 pr-40`}>
           <p className="text text_type_main-large ml-10">{title}</p>

@@ -6,7 +6,7 @@ import styles from './Ingridients.module.css'
 
 const Ingridients = ({ingredients, showIngridientsModal}) => {
   const buns = ingredients.filter((item) => {
-      return item.type === 'bun';
+    return item.type !== 'bun';
   })
   const sauces = ingredients.filter((item) => {
       return item.type === 'sauce';

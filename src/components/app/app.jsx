@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./app.module.css";
 import Content from "../Content/Content";
 import AppHeader from "../AppHeader/AppHeader";
