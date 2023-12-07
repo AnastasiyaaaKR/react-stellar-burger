@@ -1,4 +1,4 @@
-.IngredientDetails__header{
+.IngredientDetailsContent__header{
   text-align: center;
 }
 
@@ -7,7 +7,7 @@
   text-align: center;
 }
 
-.IngredientDetails__image {
+.IngredientDetailsContent__image {
   width: 480px;
   height: 240px;
 }

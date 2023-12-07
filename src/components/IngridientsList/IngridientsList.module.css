@@ -1,8 +1,8 @@
-.ingridient__section {
+.IngridientsList__section {
   max-width: 600px;
 }
 
-.ingridient {
+.IngridientsList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

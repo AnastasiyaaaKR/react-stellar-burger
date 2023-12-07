@@ -1,26 +1,37 @@
 import React from "react";
-import Buns from "../Buns/Buns";
-import Sauces from "../Sauces/Sauces";
-import Fillings from "../Fillings/Fillings";
-import styles from './Ingridients.module.css'
+import styles from "./Ingridients.module.css";
+import IngridientsList from "../IngridientsList/IngridientsList";
+import PropTypes from "prop-types";
+import {ingredientPropType} from "../../utils/prop-types";
 
-const Ingridients = ({ingredients, showIngridientsModal}) => {
-  const buns = ingredients.filter((item) => {
-    return item.type !== 'bun';
-  })
-  const sauces = ingredients.filter((item) => {
-      return item.type === 'sauce';
-  })
-  const fillings = ingredients.filter((item) => {
-      return item.type === 'main';
-  })
+const Ingridients = ({ ingredients, showIngridientsModal }) => {
   return (
     <div className={`${styles.section__ingridients} custom-scroll`}>
-      <Buns buns={buns} showIngridientsModal={showIngridientsModal}/>
-      <Sauces sauces ={sauces} showIngridientsModal={showIngridientsModal}/>
-      <Fillings fillings ={fillings} showIngridientsModal={showIngridientsModal}/>
+      <IngridientsList
+        ingredients={ingredients}
+        type="bun"
+        name="Булки"
+        showIngridientsModal={showIngridientsModal}
+      />
+      <IngridientsList
+        ingredients={ingredients}
+        type="sauce"
+        name="Соусы"
+        showIngridientsModal={showIngridientsModal}
+      />
+      <IngridientsList
+        ingredients={ingredients}
+        type="main"
+        name="Начинки"
+        showIngridientsModal={showIngridientsModal}
+      />
     </div>
-  )}
+  );
+};
 
+Ingridients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType),
+  showIngridientsModal: PropTypes.func,
+}
 
-export default Ingridients
+export default Ingridients;
