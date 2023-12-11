@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  height: 88px;
+  margin-top: 40px;
+  background-color: #1c1c21;
+}
+
+.header__navigation {
+  width: 100%;
+  width: 1280px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon__wrapper {
+  display: flex;
+  text-decoration: none;
+}
+
+.link__wrapper {
+  display: flex;
+}
+
+.link_active {
+  color: #f2f2f3;
+}

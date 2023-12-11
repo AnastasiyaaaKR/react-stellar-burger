@@ -1,0 +1,18 @@
+.IngredientDetailsContent__header{
+  text-align: center;
+}
+
+.image__wrapper {
+  display: block;
+  text-align: center;
+}
+
+.IngredientDetailsContent__image {
+  width: 480px;
+  height: 240px;
+}
+
+.Details__wrapper {
+  display: flex;
+  justify-content: center;
+}
