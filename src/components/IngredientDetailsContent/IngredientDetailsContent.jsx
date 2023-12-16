@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./IngredientDetailsContent.module.css";
-import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/prop-types";
 
-const IngredientDetailsContent = ({item, ingredients}) => {
+const IngredientDetailsContent = ({item}) => {
   return(
     <div>
       <div className={styles.image__wrapper}>
@@ -16,7 +15,7 @@ const IngredientDetailsContent = ({item, ingredients}) => {
         <p
           className={`${styles.IngredientDetailsContent__header} text text_type_main-medium mt-4 mb-8`}
         >
-          {ingredients.name}
+          {item.name}
         </p>
         <div className={`${styles.Details__wrapper} mb-15`}>
           <div className="mr-5">
@@ -57,8 +56,7 @@ const IngredientDetailsContent = ({item, ingredients}) => {
 };
 
 IngredientDetailsContent.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType),
-  item: PropTypes.object,
+  item: ingredientPropType,
 }
 
 export default IngredientDetailsContent;

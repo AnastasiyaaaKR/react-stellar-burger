@@ -4,6 +4,9 @@ import Content from "../Content/Content";
 import AppHeader from "../AppHeader/AppHeader";
 import OrderDetailsModal from "../OrderDetailsModal/OrderDetailsModal";
 import IngredientDetailsModal from "../IngredientDetailsModal/IngredientDetailsModal";
+import { selectIngridients, setIngredients } from "../../services/IngridientsSlice";
+import { selectModalIngridient, setModalIngredient } from "../../services/modalIngridientSlice";
+import { useSelector, useDispatch } from 'react-redux';
 
 const domen = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -15,7 +18,8 @@ function getResponseData(res) {
 }
 
 function App() {
-  const [ingredients, setIngredients] = useState([]);
+  const ingredients = useSelector(selectIngridients);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getIngridients = () => {
@@ -23,7 +27,7 @@ function App() {
     };
     getIngridients()
       .then((res) => {
-        setIngredients(res.data);
+        dispatch(setIngredients(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -40,10 +44,10 @@ function App() {
   };
 
   const [fullInformation, setFullInformation] = useState(false);
-  const [fullCard, setFullCard] = useState({});
+  const modalIngredient = useSelector(selectModalIngridient);
   const showIngridientDetails = (item) => {
     setFullInformation(true);
-    setFullCard(item);
+    dispatch(setModalIngredient(item))
   };
 
   const closeIngridientDetails = () => {
@@ -60,9 +64,8 @@ function App() {
         />
         <OrderDetailsModal visible={visible} closeModal={closeOrderDetails} />
         <IngredientDetailsModal
-          item={fullCard}
+          item={modalIngredient}
           fullInformation={fullInformation}
-          ingredients={ingredients}
           closeModal={closeIngridientDetails}
         />
     </div>
