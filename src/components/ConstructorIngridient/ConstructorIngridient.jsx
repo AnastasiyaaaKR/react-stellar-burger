@@ -5,6 +5,8 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { selectConstructorIngridients, changeIngridients } from "../../services/constructorIngridientSlice";
+import PropTypes from "prop-types";
+import {ingredientPropType} from "../../utils/prop-types";
 
 const ConstructorIngridient = ({ ingredient, index }) => {
   const burgerArr = useSelector(selectConstructorIngridients);
@@ -48,6 +50,11 @@ const ConstructorIngridient = ({ ingredient, index }) => {
       />
     </div>
   );
+};
+
+ConstructorIngridient.propTypes = {
+  index: PropTypes.number,
+  ingredient: ingredientPropType, 
 };
 
 export default ConstructorIngridient;

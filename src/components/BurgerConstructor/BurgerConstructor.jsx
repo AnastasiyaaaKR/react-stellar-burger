@@ -61,14 +61,14 @@ const BurgerConstructor = ({ showModal }) => {
       )}
       <div className={styles.order__wrapper}>
         <p
-          className={`${styles.ingridient__costText}text text_type_digits-default`}
+          className={`${styles.ingridient__costText} text text_type_digits-default`}
         >
           610
         </p>
         <div className={`mr-10${styles.icon__wrapper}`}>
           <CurrencyIcon type="primary" className="mr-10" />
         </div>
-        <div className="ml-10">
+        <div className={`${styles.button__wrapper} ml-10`}>
           <Button
             htmlType="button"
             type="primary"
