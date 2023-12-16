@@ -8,12 +8,13 @@ export const modalIngridientSlice = createSlice({
   reducers: {
     setModalIngredient: (state, action) => {
       state.value = action.payload
-    }
+    },
+    deleteModalIngridient: (state) => {
+      state.value = {}
+    },
   }
 })
 
 export const selectModalIngridient = state => state.modalIngridient.value
-
-export const { setModalIngredient } = modalIngridientSlice.actions
-
+export const { setModalIngredient, deleteModalIngridient } = modalIngridientSlice.actions
 export default modalIngridientSlice.reducer

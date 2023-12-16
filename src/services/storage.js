@@ -10,6 +10,6 @@ export default configureStore({
     ingridients: ingridientsReducer,
     modalIngridient: modalIngridientReducer,
     orderNumber: orderNumberReducer,
-    constructorIngridients: constructorIngridientsReducer, 
+    constructorIngridients: constructorIngridientsReducer,
   }
 })

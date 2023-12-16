@@ -13,7 +13,7 @@ const Content = ({ visible, ingredients, showModal, showIngridientsModal }) => {
         ingredients={ingredients}
         showIngridientsModal={showIngridientsModal}
       />
-      <BurgerConstructor ingredients={ingredients} showModal={showModal} />
+      <BurgerConstructor showModal={showModal} />
     </main>
   );
 };

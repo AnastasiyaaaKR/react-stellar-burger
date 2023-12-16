@@ -5,7 +5,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import OrderDetailsModal from "../OrderDetailsModal/OrderDetailsModal";
 import IngredientDetailsModal from "../IngredientDetailsModal/IngredientDetailsModal";
 import { selectIngridients, setIngredients } from "../../services/IngridientsSlice";
-import { selectModalIngridient, setModalIngredient } from "../../services/modalIngridientSlice";
+import { selectModalIngridient, setModalIngredient, deleteModalIngridient } from "../../services/modalIngridientSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
 const domen = "https://norma.nomoreparties.space/api/ingredients";
@@ -52,6 +52,7 @@ function App() {
 
   const closeIngridientDetails = () => {
     setFullInformation(false);
+    dispatch(deleteModalIngridient())
   };
 
   return (

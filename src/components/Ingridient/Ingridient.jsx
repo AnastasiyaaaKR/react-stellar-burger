@@ -6,12 +6,18 @@ import {
 import styles from "./Ingridient.module.css";
 import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/prop-types";
+import { useDrag } from "react-dnd";
 
 const Ingridient = ({item, showIngridientsModal }) => {
+  const[, dragRef]= useDrag({
+    type: "ingridient", 
+    item
+  })
   return (
     <div
       onClick={showIngridientsModal}
       className={`${styles.ingridient__wpapper} mt-6 ml-4 mr-6`}
+      ref={dragRef}
     >
       <img src={item.image} alt={item.name} />
       <Counter count={1} size="default" />
