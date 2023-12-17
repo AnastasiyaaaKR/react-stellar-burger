@@ -20,7 +20,7 @@ const Ingridient = ({item, showIngridientsModal }) => {
       ref={dragRef}
     >
       <img src={item.image} alt={item.name} />
-      <Counter count={1} size="default" />
+      <Counter count={item.__v} size="default" />
       <div className={styles.ingridient__cost}>
         <p
           className={`${styles.ingridient__costText}text text_type_digits-default mt-1 mb-1`}

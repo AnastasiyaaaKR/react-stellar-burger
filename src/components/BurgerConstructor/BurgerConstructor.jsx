@@ -17,19 +17,37 @@ import {
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ConstructorIngridient from "../ConstructorIngridient/ConstructorIngridient";
+import { createOrder as createOrderAction } from "../../services/orderNumberSlice";
+import { incrementCount, incrementCountBun } from "../../services/IngridientsSlice";
 
 const BurgerConstructor = ({ showModal }) => {
+  const dispatch = useDispatch();
+
+  const createOrder = () => {
+    let arrOfIds = [];
+    for (const ingridient of constructorIngredients) {
+      arrOfIds.push(ingridient._id);
+    }
+    if (constructorBun) {
+      arrOfIds.push(constructorBun._id);
+    }
+    dispatch(createOrderAction(arrOfIds))
+    .unwrap()
+    .then(showModal);
+  };
+
   const constructorIngredients = useSelector(selectConstructorIngridients);
   const constructorBun = useSelector(selectConstructorBun);
-  const dispatch = useDispatch();
   const [, dropRef] = useDrop({
     accept: "ingridient",
     drop(item) {
       if (item.type === "bun") {
         dispatch(setBun(item));
+        dispatch(incrementCountBun(item._id));
       } else {
         const newIngridient = { ...item, _constId: uuidv4() };
         dispatch(addNewIngridient(newIngridient));
+        dispatch(incrementCount(item._id));
       }
     },
   });
@@ -97,7 +115,7 @@ const BurgerConstructor = ({ showModal }) => {
             htmlType="button"
             type="primary"
             size="medium"
-            onClick={showModal}
+            onClick={createOrder}
           >
             Оформить заказ
           </Button>

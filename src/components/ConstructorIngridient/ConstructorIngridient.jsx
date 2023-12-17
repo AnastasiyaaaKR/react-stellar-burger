@@ -4,16 +4,25 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { selectConstructorIngridients, changeIngridients } from "../../services/constructorIngridientSlice";
+import {
+  selectConstructorIngridients,
+  changeIngridients,
+  removeIngridient,
+} from "../../services/constructorIngridientSlice";
+import { decrementCount } from "../../services/IngridientsSlice";
 import PropTypes from "prop-types";
-import {ingredientPropType} from "../../utils/prop-types";
+import { ingredientPropType } from "../../utils/prop-types";
 
 const ConstructorIngridient = ({ ingredient, index }) => {
+  const dispatch = useDispatch();
+  const deleteBurgerIngridient = () => {
+    dispatch(removeIngridient(ingredient));
+    dispatch(decrementCount(ingredient._id))
+  };
   const burgerArr = useSelector(selectConstructorIngridients);
   const findIndex = (item) => {
     return burgerArr.indexOf(item);
   };
-  const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: "sort",
     item: { data: ingredient },
@@ -23,11 +32,13 @@ const ConstructorIngridient = ({ ingredient, index }) => {
     accept: "sort",
     hover({ data }) {
       if (data._constId !== ingredient._constId) {
-        dispatch(changeIngridients({
-          indexFrom: findIndex(data),
-          indexTo: index,
-          ingridient: data,
-        }));
+        dispatch(
+          changeIngridients({
+            indexFrom: findIndex(data),
+            indexTo: index,
+            ingridient: data,
+          })
+        );
       }
     },
   });
@@ -42,6 +53,7 @@ const ConstructorIngridient = ({ ingredient, index }) => {
         <DragIcon type="primary" />
       </div>
       <ConstructorElement
+        handleClose={deleteBurgerIngridient}
         extraClass={styles.ConstructorElement}
         key={ingredient._id}
         text={ingredient.name}
@@ -54,7 +66,7 @@ const ConstructorIngridient = ({ ingredient, index }) => {
 
 ConstructorIngridient.propTypes = {
   index: PropTypes.number,
-  ingredient: ingredientPropType, 
+  ingredient: ingredientPropType,
 };
 
 export default ConstructorIngridient;
