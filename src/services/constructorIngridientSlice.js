@@ -4,7 +4,7 @@ export const constructorIngridientSlice = createSlice({
   name: 'constructorIngridients',
   initialState: {
     bun:null,
-    ingridients: []
+    ingridients: [],
   },
   reducers: {
     setConstructorIngridients: (state, action) => {
