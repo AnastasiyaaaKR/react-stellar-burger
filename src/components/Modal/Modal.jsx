@@ -8,20 +8,17 @@ import ReactDOM from "react-dom";
 const modalRoot = document.getElementById("modals");
 
 const Modal = ({ closeModal, children, title }) => {
-
-  
   useEffect(() => {
     function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
+      if (evt.key === "Escape") {
         closeModal();
       }
     }
-      document.addEventListener('keydown', closeByEscape);
-      return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
-
-  }, []) 
+    document.addEventListener("keydown", closeByEscape);
+    return () => {
+      document.removeEventListener("keydown", closeByEscape);
+    };
+  }, []);
 
   return ReactDOM.createPortal(
     <ModalOverlay closeModal={closeModal}>
