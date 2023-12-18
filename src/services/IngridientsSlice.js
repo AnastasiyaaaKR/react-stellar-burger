@@ -5,6 +5,7 @@ export const ingridientsSlice = createSlice({
   name: "ingridients",
   initialState: {
     value: [],
+    currentType: "bun", 
   },
   reducers: {
     incrementCount: (state, action) => {
@@ -24,6 +25,9 @@ export const ingridientsSlice = createSlice({
       const el = state.value.find((el) => el._id === action.payload);
       el.__v -= 1;
     },
+    setCurrentType: (state, action) => {
+      state.currentType = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchIngridients.fulfilled, (state, action) => {
@@ -41,6 +45,7 @@ export const fetchIngridients = createAsyncThunk(
   }
 );
 
-export const { incrementCount, incrementCountBun, decrementCount } = ingridientsSlice.actions;
+export const { incrementCount, incrementCountBun, decrementCount, setCurrentType } = ingridientsSlice.actions;
 export const selectIngridients = (state) => state.ingridients.value;
+export const selectCurrentType = (state) => state.ingridients.currentType;
 export default ingridientsSlice.reducer;
