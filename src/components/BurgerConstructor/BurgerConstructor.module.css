@@ -10,7 +10,6 @@
 }
 
 .ingridients__wrapper {
-  height: 467px;
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -24,6 +23,7 @@
 }
 
 .icon__wrapper {
+  display: flex;
   padding-right: 8px;
   cursor: pointer;
 }
@@ -38,4 +38,12 @@
   background-color: #1C1C21;
   width: 568px;
   margin-bottom: 16px;
+}
+
+.button__wrapper {
+  width: 215px;
+}
+
+.ingridient__costText {
+  margin-right: 8px;
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import doneIcon from "../../images/done.png";
 import styles from "./OrderDetailsContent.module.css";
+import PropTypes from "prop-types";
 
-const OrderDetailsContent = () => {
+const OrderDetailsContent = ({orderNumber}) => {
   return (
     <div className={styles.OrderDetailsContent__wrapper}>
-      <p className="text text_type_digits-large mb-8">034536</p>
+      <p className="text text_type_digits-large mb-8">{orderNumber}</p>
       <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
       <img src={doneIcon} alt="Галочка готово" />
       <p className="text text_type_main-small mt-15 mb-2">
@@ -17,5 +18,9 @@ const OrderDetailsContent = () => {
     </div>
   );
 };
+
+OrderDetailsContent.propTypes = {
+  orderNumber: PropTypes.number,
+}
 
 export default OrderDetailsContent;

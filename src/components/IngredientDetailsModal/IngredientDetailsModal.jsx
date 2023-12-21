@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/prop-types";
 
 const IngredientDetailsModal = ({
-  ingredients,
   fullInformation,
   item,
   closeModal,
@@ -13,7 +12,7 @@ const IngredientDetailsModal = ({
   if (fullInformation) {
     return (
       <Modal closeModal={closeModal} title="Детали ингредиента">
-        <IngredientDetailsContent item={item} ingredients={ingredients}/>
+        <IngredientDetailsContent item={item}/>
       </Modal>
     );
   }
@@ -21,8 +20,7 @@ const IngredientDetailsModal = ({
 };
 
 IngredientDetailsModal.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType),
-  item: PropTypes.object,
+  item: ingredientPropType,
   fullInformation: PropTypes.bool,
   closeModal: PropTypes.func,
 }
