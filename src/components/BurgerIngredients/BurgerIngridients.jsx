@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import {ingredientPropType} from "../../utils/prop-types";
 import { selectCurrentType } from "../../services/IngridientsSlice";
 import { useSelector } from "react-redux";
+import styles from './BurgerIngridients.module.css'
 
 const BurgerIngridients = ({ visible, ingredients, showIngridientsModal }) => {
   const current = useSelector(selectCurrentType)
@@ -13,7 +14,7 @@ const BurgerIngridients = ({ visible, ingredients, showIngridientsModal }) => {
   return (
     <div className="mr-10">
       <IngridientsHeader />
-      <div style={{ display: "flex" }}>
+      <div className={styles.BurgerIngridients__wrapper}>
         <Tab value="one" active={current === "bun"}>
           Булки
         </Tab>

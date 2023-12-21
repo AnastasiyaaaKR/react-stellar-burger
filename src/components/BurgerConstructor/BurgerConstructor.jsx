@@ -13,16 +13,19 @@ import {
 import {
   selectConstructorIngridients,
   selectConstructorBun,
+  cleanBurgerIngridients,
 } from "../../services/constructorIngridientSlice";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ConstructorIngridient from "../ConstructorIngridient/ConstructorIngridient";
 import { createOrder as createOrderAction } from "../../services/orderNumberSlice";
-import { incrementCount, incrementCountBun } from "../../services/IngridientsSlice";
+import {
+  incrementCount,
+  incrementCountBun,
+} from "../../services/IngridientsSlice";
 
 const BurgerConstructor = ({ showModal }) => {
   const dispatch = useDispatch();
-
   const createOrder = () => {
     let arrOfIds = [];
     for (const ingridient of constructorIngredients) {
@@ -32,8 +35,9 @@ const BurgerConstructor = ({ showModal }) => {
       arrOfIds.push(constructorBun._id);
     }
     dispatch(createOrderAction(arrOfIds))
-    .unwrap()
-    .then(showModal);
+      .unwrap()
+      .then(showModal)
+      .then(() => dispatch(cleanBurgerIngridients()));
   };
 
   const constructorIngredients = useSelector(selectConstructorIngridients);
@@ -116,6 +120,7 @@ const BurgerConstructor = ({ showModal }) => {
             type="primary"
             size="medium"
             onClick={createOrder}
+            disabled={!constructorBun || !constructorIngredients.length}
           >
             Оформить заказ
           </Button>

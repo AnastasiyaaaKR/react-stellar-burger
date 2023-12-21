@@ -1,22 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createOrder as createOrderApi } from "../api";
 
 export const orderNumberSlice = createSlice({
-  name: 'orderNumber',
+  name: "orderNumber",
   initialState: {
-    value: 0
+    value: 0,
   },
   reducers: {
     setOrderNumber: (state, action) => {
-      state.value = action.payload
-    }
+      state.value = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createOrder.fulfilled, (state, action) => {
       state.value = action.payload;
     });
   },
-})
+});
 
 export const createOrder = createAsyncThunk(
   "orderNumber/createOrder",
@@ -27,8 +27,8 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-export const selectOrderNumber = state => state.orderNumber.value
+export const selectOrderNumber = (state) => state.orderNumber.value;
 
-export const { setOrderNumber } = orderNumberSlice.actions
+export const { setOrderNumber } = orderNumberSlice.actions;
 
-export default orderNumberSlice.reducer
+export default orderNumberSlice.reducer;

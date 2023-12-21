@@ -27,6 +27,10 @@ export const constructorIngridientSlice = createSlice({
       );
       state.ingridients.splice(index, 1);
     },
+    cleanBurgerIngridients: (state) => {
+      state.ingridients = [];
+      state.bun = null;
+    }, 
   },
 });
 
@@ -39,5 +43,6 @@ export const {
   setBun,
   changeIngridients,
   removeIngridient,
+  cleanBurgerIngridients,
 } = constructorIngridientSlice.actions;
 export default constructorIngridientSlice.reducer;
