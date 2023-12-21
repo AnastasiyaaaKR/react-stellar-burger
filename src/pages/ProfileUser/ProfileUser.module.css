@@ -1,0 +1,17 @@
+.ProfileUser__wrapper{
+  display: flex;
+}
+
+.ProfileUser__Tab_wrapper{
+  width: 320px;
+}
+
+.email__wparrer{
+  display: flex;
+  flex-direction: column;
+}
+
+.ProfileUser_text{
+  display: flex;
+  flex-direction: column;
+}

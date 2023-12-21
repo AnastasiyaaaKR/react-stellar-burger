@@ -1,64 +1,28 @@
-import React, { useState, useEffect } from "react";
-import styles from "./App.module.css";
-import Content from "../Content/Content";
-import AppHeader from "../AppHeader/AppHeader";
-import OrderDetailsModal from "../OrderDetailsModal/OrderDetailsModal";
-import IngredientDetailsModal from "../IngredientDetailsModal/IngredientDetailsModal";
-import {
-  selectIngridients,
-  fetchIngridients,
-} from "../../services/IngridientsSlice";
-import {
-  selectModalIngridient,
-  setModalIngredient,
-  deleteModalIngridient,
-} from "../../services/modalIngridientSlice";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from '../../pages/Main/Main';
+import Authorisation from '../../pages/Authorisation/Authorisation';
+import IngredientPage from '../../pages/IngredientPage/IngredientPage';
+import ProfileUser from '../../pages/ProfileUser/ProfileUser';
+import RecoveryPassword from '../../pages/RecoveryPassword/RecoveryPassword';
+import Registration from '../../pages/Registration/Registration';
+import ResetPassword from '../../pages/ResetPassword/ResetPassword';
 
-function App() {
-  const ingredients = useSelector(selectIngridients);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchIngridients());
-  }, []);
-
-  const [visible, setVisible] = useState(false);
-  const showOrderDetails = () => {
-    setVisible(true);
-  };
-  const closeOrderDetails = () => {
-    setVisible(false);
-  };
-
-  const [fullInformation, setFullInformation] = useState(false);
-  const modalIngredient = useSelector(selectModalIngridient);
-  const showIngridientDetails = (item) => {
-    setFullInformation(true);
-    dispatch(setModalIngredient(item));
-  };
-
-  const closeIngridientDetails = () => {
-    setFullInformation(false);
-    dispatch(deleteModalIngridient());
-  };
-
+const App = () => {
   return (
-    <div className={styles.app}>
-      <AppHeader />
-      <Content
-        ingredients={ingredients}
-        showModal={showOrderDetails}
-        showIngridientsModal={showIngridientDetails}
-      />
-      <OrderDetailsModal visible={visible} closeModal={closeOrderDetails} />
-      <IngredientDetailsModal
-        item={modalIngredient}
-        fullInformation={fullInformation}
-        closeModal={closeIngridientDetails}
-      />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Authorisation />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/forgot-password" element={<RecoveryPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/profile" element={<ProfileUser />} />
+        <Route path="/ingredients/:id" element={<IngredientPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

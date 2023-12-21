@@ -1,0 +1,20 @@
+.Authorisation__wrapper{
+  max-width: 480px;
+  text-align: center;
+  margin: 196px auto;
+}
+
+.Authorisation__header{
+  text-align: center;
+}
+
+.Authorisation__textWrapper{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 0;
+}
+
+.Authorisation__buttonWrapper {
+  padding: 0;
+}
