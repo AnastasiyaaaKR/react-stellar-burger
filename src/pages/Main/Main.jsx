@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Main.module.css";
 import Content from "../../components/Content/Content";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import OrderDetailsModal from "../../components/OrderDetailsModal/OrderDetailsModal";
 import IngredientDetailsModal from "../../components/IngredientDetailsModal/IngredientDetailsModal";
 import {
@@ -45,7 +44,6 @@ function Main() {
 
   return (
     <div className={styles.app}>
-      <AppHeader />
       <Content
         ingredients={ingredients}
         showModal={showOrderDetails}

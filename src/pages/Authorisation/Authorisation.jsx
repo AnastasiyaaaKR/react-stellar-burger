@@ -5,6 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Authorisation.module.css";
+import { Link } from "react-router-dom";
 
 const Authorisation = () => {
   const [password, setPassword] = React.useState("password");
@@ -33,27 +34,31 @@ const Authorisation = () => {
         <p className="text text_type_main-default text_color_inactive pr-2">
           Вы — новый пользователь?
         </p>
-        <Button
-          htmlType="button"
-          type="secondary"
-          size="medium"
-          extraClass={styles.Authorisation__buttonWrapper}
-        >
-          Зарегистрироваться
-        </Button>
+        <Link to="/register">
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            extraClass={styles.Authorisation__buttonWrapper}
+          >
+            Зарегистрироваться
+          </Button>
+        </Link>
       </div>
       <div className={`${styles.Authorisation__textWrapper} mt-4`}>
         <p className="text text_type_main-default text_color_inactive pr-2">
           Забыли пароль?
         </p>
-        <Button
-          htmlType="button"
-          type="secondary"
-          size="medium"
-          extraClass={styles.Authorisation__buttonWrapper}
-        >
-          Восстановить пароль
-        </Button>
+        <Link to='/forgot-password'>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            extraClass={styles.Authorisation__buttonWrapper}
+          >
+            Восстановить пароль
+          </Button>
+        </Link>
       </div>
     </div>
   );

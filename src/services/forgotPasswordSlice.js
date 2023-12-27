@@ -1,0 +1,28 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { forgotPassword } from "../api";
+
+export const forgotPasswordSlice = createSlice({
+  name: "forgotPassword",
+  initialState: {
+    value: '',
+  },
+  reducers: {
+    setEmail: (state, action) => {
+      state.value = action.payload;
+    },
+  },
+});
+
+
+export const fetchEmail = createAsyncThunk(
+  "forgotPassword/forgotPassword",
+  (email) => {
+    return forgotPassword(email)
+  }
+);
+
+export const selectEmail = (state) => state.forgotPassword.value;
+
+export const { setEmail } = forgotPasswordSlice.actions;
+
+export default forgotPasswordSlice.reducer;

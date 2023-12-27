@@ -3,6 +3,9 @@ import ingridientsReducer from './IngridientsSlice'
 import modalIngridientReducer from "./modalIngridientSlice"
 import orderNumberReducer from "./orderNumberSlice";
 import constructorIngridientsReducer from "./constructorIngridientSlice";
+import forgotPasswordReducer from "./forgotPasswordSlice";
+import resetPasswordReducer from "./resetPasswordSlice";
+import registrationReducer from "./registrationSlice";
 
 
 export default configureStore({
@@ -11,5 +14,8 @@ export default configureStore({
     modalIngridient: modalIngridientReducer,
     orderNumber: orderNumberReducer,
     constructorIngridients: constructorIngridientsReducer,
+    forgotPassword: forgotPasswordReducer,
+    resetPassword: resetPasswordReducer,
+    registration: registrationReducer,
   }
 })

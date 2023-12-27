@@ -1,5 +1,8 @@
 .ProfileUser__wrapper{
+  max-width: 860px;
   display: flex;
+  justify-content: center;
+  margin: 120px 0  0 200px;
 }
 
 .ProfileUser__Tab_wrapper{

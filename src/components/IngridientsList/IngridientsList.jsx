@@ -3,6 +3,7 @@ import styles from "./IngridientsList.module.css";
 import Ingridient from "../Ingridient/Ingridient";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
+import { Link } from "react-router-dom";
 
 const IngridientsList = React.forwardRef(
   ({ name, type, ingredients, showIngridientsModal }, ref) => {
@@ -16,16 +17,18 @@ const IngridientsList = React.forwardRef(
           <div className={`${styles.IngridientsList}`}>
             {items.map((item) => {
               return (
-                <Ingridient
-                  showIngridientsModal={() => {
-                    showIngridientsModal(item);
-                  }}
-                  item={item}
-                  name={item.name}
-                  image={item.image}
-                  price={item.price}
-                  key={item._id}
-                />
+                <Link to={`/ingredients/${item._id}`} className={styles.IngridientsList__link}>
+                  <Ingridient
+                    showIngridientsModal={() => {
+                      showIngridientsModal(item);
+                    }}
+                    item={item}
+                    name={item.name}
+                    image={item.image}
+                    price={item.price}
+                    key={item._id}
+                  />
+                </Link>
               );
             })}
           </div>

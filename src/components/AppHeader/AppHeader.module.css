@@ -27,6 +27,11 @@
   display: flex;
 }
 
-.link_active {
+.linkActive {
   color: #f2f2f3;
+}
+
+.linkUnActive{
+  color: #8585AD;
+  text-decoration: none;
 }

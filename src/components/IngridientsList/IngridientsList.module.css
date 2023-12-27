@@ -7,3 +7,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.IngridientsList__link {
+  text-decoration: none;
+  color: #F2F2F3;
+}

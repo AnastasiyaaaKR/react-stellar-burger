@@ -1,6 +1,15 @@
 const baseUrl = "https://norma.nomoreparties.space/api";
 const domenUrl = `${baseUrl}/ingredients`;
 const createOrderUrl = `${baseUrl}/orders`;
+const domenForgotPassword = `${baseUrl}/password-reset`;
+const domenResetPassword = `${baseUrl}/password-reset/reset`;
+const authUrl = "https://norma.nomoreparties.space/api/auth/";
+const registerUrl = `${authUrl}register`;
+const UserDataUrl = `${authUrl}user`;
+
+// const loginUrl = `${authUrl}login`;
+// const logoutUrl = `${authUrl}logout`;
+// const tokenUrl = `${authUrl}token`;
 
 function getResponseData(res) {
   if (!res.ok) {
@@ -24,3 +33,43 @@ export const createOrder = (ingredients) => {
     }),
   }).then(getResponseData);
 };
+
+export const forgotPassword = (email) => {
+  return fetch(domenForgotPassword, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+    }),
+  }).then(getResponseData);
+};
+
+export const resetPassword = (token, password) => {
+  return fetch(domenResetPassword, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password: password,
+      token: token,
+    }),
+  }).then(getResponseData);
+};
+
+export const registration = (email, password, name) => {
+  return fetch(registerUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+      name: name,
+    }),
+  }).then(getResponseData);
+};
+
