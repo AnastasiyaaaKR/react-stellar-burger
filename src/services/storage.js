@@ -6,6 +6,8 @@ import constructorIngridientsReducer from "./constructorIngridientSlice";
 import forgotPasswordReducer from "./forgotPasswordSlice";
 import resetPasswordReducer from "./resetPasswordSlice";
 import registrationReducer from "./registrationSlice";
+import loginReducer from "./loginSlice";
+import userReducer from './userProfileSlice';
 
 
 export default configureStore({
@@ -17,5 +19,7 @@ export default configureStore({
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer,
     registration: registrationReducer,
+    login: loginReducer,
+    user: userReducer,
   }
 })

@@ -24,13 +24,6 @@ const Registration = () => {
   const password = useSelector(selectPassword);
   const name = useSelector(selectName);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (email && password && name) {
-      dispatch(registerUser({email, password, name})).unwrap();
-    }
-  };
-
   const onChangeEmail = (e) => {
     dispatch(setEmail(e.target.value));
   };
@@ -41,6 +34,18 @@ const Registration = () => {
 
   const onChangeName = (e) => {
     dispatch(setName(e.target.value));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email && password && name) {
+      dispatch(registerUser({ email, password, name }))
+        .unwrap()
+        .then((res) => {
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+        });
+    }
   };
 
   return (
@@ -74,7 +79,7 @@ const Registration = () => {
           type="primary"
           size="medium"
           extraClass="mb-20"
-           disabled={!password || !email || !name}
+          disabled={!password || !email || !name}
         >
           Зарегистрироваться
         </Button>

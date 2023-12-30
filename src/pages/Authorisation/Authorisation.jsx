@@ -6,11 +6,38 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Authorisation.module.css";
 import { Link } from "react-router-dom";
+import {
+  setEmail,
+  setPassword,
+  loginUser,
+  selectEmail,
+  selectPassword,
+} from "../../services/loginSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Authorisation = () => {
-  const [password, setPassword] = React.useState("password");
-  const onChange = (e) => {
-    setPassword(e.target.password);
+  const dispatch = useDispatch();
+  const email = useSelector(selectEmail);
+  const password = useSelector(selectPassword);
+
+  const onChangeEmail = (e) => {
+    dispatch(setEmail(e.target.value));
+  };
+
+  const onChangePassword = (e) => {
+    dispatch(setPassword(e.target.value));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      dispatch(loginUser({ email, password }))
+        .unwrap()
+        .then((res) => {
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+        });
+    }
   };
 
   return (
@@ -20,16 +47,23 @@ const Authorisation = () => {
       >
         Вход
       </h1>
-      <EmailInput placeholder="E-mail" extraClass="mb-6" />
-      <PasswordInput
-        onChange={onChange}
-        value={password}
-        name={"password"}
-        extraClass="mb-6"
-      />
-      <Button htmlType="button" type="primary" size="medium">
-        Войти
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <EmailInput
+          placeholder="E-mail"
+          extraClass="mb-6"
+          onChange={onChangeEmail}
+          name="email"
+        />
+        <PasswordInput
+          onChange={onChangePassword}
+          value={password}
+          name="password"
+          extraClass="mb-6"
+        />
+        <Button htmlType="submit" type="primary" size="medium">
+          Войти
+        </Button>
+      </form>
       <div className={`${styles.Authorisation__textWrapper} mt-20`}>
         <p className="text text_type_main-default text_color_inactive pr-2">
           Вы — новый пользователь?
@@ -49,7 +83,7 @@ const Authorisation = () => {
         <p className="text text_type_main-default text_color_inactive pr-2">
           Забыли пароль?
         </p>
-        <Link to='/forgot-password'>
+        <Link to="/forgot-password">
           <Button
             htmlType="button"
             type="secondary"
