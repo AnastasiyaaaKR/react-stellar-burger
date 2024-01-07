@@ -21,17 +21,20 @@
 .icon__wrapper {
   display: flex;
   text-decoration: none;
+  align-items: center;
 }
 
 .link__wrapper {
   display: flex;
+  align-items: center;
 }
 
 .linkActive {
-  color: #f2f2f3;
+  color: #F2F2F3;
+  font-family: JetBrains Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
-.linkUnActive{
-  color: #8585AD;
-  text-decoration: none;
-}

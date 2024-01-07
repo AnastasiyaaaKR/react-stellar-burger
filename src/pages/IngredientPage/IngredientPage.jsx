@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const IngredientPage = () => {
   const ingredients = useSelector(selectIngridients);
   const params = useParams();
-  const [ingredient, setIngredient] = useState(null)
+  const [ingredient, setIngredient] = useState(null);
 
   function findIngridient(paramsId) {
     for(const ingredient of ingredients){

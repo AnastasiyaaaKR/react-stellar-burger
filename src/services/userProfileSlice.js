@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getUser as apiGetUser, updateUser as apiUpdateUser, refreshAccessToken } from "../api"
+import {
+  getUser as apiGetUser,
+  updateUser as apiUpdateUser,
+  refreshAccessToken,
+  logout as logoutApi,
+} from "../api";
 
 export const userProfileSlice = createSlice({
   name: "user",
@@ -7,7 +12,7 @@ export const userProfileSlice = createSlice({
     name: "",
     email: "",
     password: "",
-    initialName: "", 
+    initialName: "",
     initialEmail: "",
     initialPassword: "",
   },
@@ -40,37 +45,41 @@ export const userProfileSlice = createSlice({
       state.initialName = action.payload.user.name;
       state.initialPassword = "";
     });
-  }
-})
+  },
+});
 
-export const getUser = createAsyncThunk(
-  "user/getUser",
-  () => {
-    return apiGetUser()
+export const getUser = createAsyncThunk("user/getUser", () => {
+  return apiGetUser()
     .then((res) => res.user)
     .catch((err) => {
-      const refreshToken = localStorage.getItem('refreshToken')
-      if(refreshToken) {
+      const refreshToken = localStorage.getItem("refreshToken");
+      if (refreshToken) {
         return refreshAccessToken(refreshToken)
-        .then((res) => {
-          localStorage.setItem('refreshToken', res.refreshToken)
-          localStorage.setItem('accessToken', res.accessToken)
-          return apiGetUser()
-        })
-        .then((res) => res.user)
+          .then((res) => {
+            localStorage.setItem("refreshToken", res.refreshToken);
+            localStorage.setItem("accessToken", res.accessToken);
+            return apiGetUser();
+          })
+          .then((res) => res.user);
       } else {
         throw err;
       }
-    })
-  }
-);
+    });
+});
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  ({name, email, password}) => {
-    return apiUpdateUser(name, email, password)
+  ({ name, email, password }) => {
+    return apiUpdateUser(name, email, password);
   }
 );
+
+export const logout = createAsyncThunk("user/logout", (token) => {
+  return logoutApi(token).then(() => {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+  });
+});
 
 export const selectName = (state) => state.user.name;
 
@@ -78,6 +87,9 @@ export const selectEmail = (state) => state.user.email;
 
 export const selectPassword = (state) => state.user.password;
 
-export const { setName,setEmail, setPassword, resetData } = userProfileSlice.actions;
+export const selectChanged = (state) => state.user.name !== state.user.initialName || state.user.email !== state.user.initialEmail || state.user.password !== state.user.initialPassword;
+
+export const { setName, setEmail, setPassword, resetData } =
+  userProfileSlice.actions;
 
 export default userProfileSlice.reducer;

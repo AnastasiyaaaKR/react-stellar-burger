@@ -17,8 +17,11 @@ import {
   selectEmail,
   selectName,
   selectPassword,
+  logout,
+  selectChanged,
 } from "../../services/userProfileSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ProfileUser = () => {
   const dispatch = useDispatch();
@@ -26,6 +29,7 @@ const ProfileUser = () => {
   const name = useSelector(selectName);
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
+  const changed = useSelector(selectChanged);
 
   React.useEffect(() => {
     dispatch(getUser());
@@ -38,10 +42,10 @@ const ProfileUser = () => {
     }
   };
 
-  const resetUser =(e) => {
+  const resetUser = (e) => {
     e.preventDefault();
     dispatch(resetData());
-  }
+  };
 
   const onChangeEmail = (e) => {
     dispatch(setEmail(e.target.value));
@@ -55,12 +59,30 @@ const ProfileUser = () => {
     dispatch(setName(e.target.value));
   };
 
+  const logoutUser = (e) => {
+    e.preventDefault();
+    dispatch(logout(localStorage.getItem("refreshToken")));
+  };
+
   return (
-    <div className={styles.ProfileUser__wrapper}>
-      <div className={`${styles.ProfileUser__Tab_wrapper} mr-15`}>
-        <Tab value="profile">Профиль</Tab>
-        <Tab value="ordersHistory">История заказов</Tab>
-        <Tab value="LogOut">Выход</Tab>
+    <div className={styles.ProfileUser}>
+      <div className={`${styles.ProfileUser__wrapper} mr-15`}>
+        <Link
+          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
+        >
+          Профиль
+        </Link>
+        <Link
+          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
+        >
+          История заказов
+        </Link>
+        <button
+          className={`text text_type_main-medium ${styles.ProfileUser__button}`}
+          onClick={logoutUser}
+        >
+          Выход
+        </button>
         <p className="text text_type_main-default text_color_inactive mt-20">
           В этом разделе вы можете изменить свои персональные данные
         </p>
@@ -98,19 +120,22 @@ const ProfileUser = () => {
               onChange={onChangePassword}
             />
           </div>
-          <div className={styles.button__wrapper}>
-            <Button htmlType="reset" type="secondary" size="medium">
-              Отмена
-            </Button>
-            <Button
-              htmlType="submit"
-              type="primary"
-              size="medium"
-              extraClass="ml-2"
-            >
-              Сохранить
-            </Button>
-          </div>
+          {changed && (
+            <div className={styles.button__wrapper}>
+              <Button htmlType="reset" type="secondary" size="medium">
+                Отмена
+              </Button>
+              <Button
+                htmlType="submit"
+                type="primary"
+                size="medium"
+                extraClass="ml-2"
+              >
+                Сохранить
+              </Button>
+            </div>
+          )
+        }
         </form>
       </div>
     </div>

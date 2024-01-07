@@ -1,12 +1,26 @@
-.ProfileUser__wrapper{
+.ProfileUser{
   max-width: 860px;
   display: flex;
   justify-content: center;
   margin: 120px 0  0 200px;
 }
 
-.ProfileUser__Tab_wrapper{
+.ProfileUser__wrapper{
   width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ProfileUser__link {
+  text-decoration: none;
+  color: #F2F2F3;
+}
+
+.ProfileUser__button {
+  color: #F2F2F3;
+  border: none;
+  background-color: transparent;
+  text-align: left;
 }
 
 .email__wparrer{
