@@ -32,7 +32,7 @@ const AppHeader = () => {
               )}
             </NavLink>
             <NavLink
-              to="#"
+              to="/order-feed"
               className={({ isActive }) =>
                 `${styles.icon__wrapper} mt-4 mb-4 ${
                   isActive ? styles.linkActive : "text_color_inactive"

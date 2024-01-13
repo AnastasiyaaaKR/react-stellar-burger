@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import {
   setEmail,
   setPassword,
-  loginUser,
   selectEmail,
   selectPassword,
 } from "../../services/loginSlice";
+import { loginUser, setUser } from "../../services/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Authorisation = () => {
@@ -34,8 +34,9 @@ const Authorisation = () => {
       dispatch(loginUser({ email, password }))
         .unwrap()
         .then((res) => {
-          localStorage.setItem('accessToken', res.accessToken);
-          localStorage.setItem('refreshToken', res.refreshToken);
+          localStorage.setItem("accessToken", res.accessToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          dispatch(setUser(res.user));
         });
     }
   };
@@ -53,6 +54,7 @@ const Authorisation = () => {
           extraClass="mb-6"
           onChange={onChangeEmail}
           name="email"
+          value={email}
         />
         <PasswordInput
           onChange={onChangePassword}

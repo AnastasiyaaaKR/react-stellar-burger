@@ -7,7 +7,7 @@ import forgotPasswordReducer from "./forgotPasswordSlice";
 import resetPasswordReducer from "./resetPasswordSlice";
 import registrationReducer from "./registrationSlice";
 import loginReducer from "./loginSlice";
-import userReducer from './userProfileSlice';
+import userReducer from './userSlice';
 
 
 export default configureStore({

@@ -9,6 +9,7 @@ import Registration from "../../pages/Registration/Registration";
 import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import NotFound from "../../pages/NotFound/NotFound";
 import AppHeader from "../AppHeader/AppHeader";
+import OrderFeed from "../../pages/OrderFeed/OrderFeed";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="profile" element={<ProfileUser />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route path="order-feed" element={<OrderFeed />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

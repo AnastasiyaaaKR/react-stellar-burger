@@ -3,32 +3,31 @@ import styles from "./ProfileUser.module.css";
 import {
   EmailInput,
   Input,
-  Tab,
   PasswordInput,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
-  setName,
-  setEmail,
-  setPassword,
+  setProfileEmail,
+  setProfileName,
+  setProfilePassword,
   resetData,
   getUser,
   updateUser,
-  selectEmail,
-  selectName,
-  selectPassword,
+  selectprofileUserEmail,
+  selectprofileUserName,
+  selectprofileUserPassword,
   logout,
   selectChanged,
-} from "../../services/userProfileSlice";
+} from "../../services/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProfileUser = () => {
   const dispatch = useDispatch();
 
-  const name = useSelector(selectName);
-  const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
+  const name = useSelector(selectprofileUserName);
+  const email = useSelector(selectprofileUserEmail);
+  const password = useSelector(selectprofileUserPassword);
   const changed = useSelector(selectChanged);
 
   React.useEffect(() => {
@@ -48,15 +47,15 @@ const ProfileUser = () => {
   };
 
   const onChangeEmail = (e) => {
-    dispatch(setEmail(e.target.value));
+    dispatch(setProfileEmail(e.target.value));
   };
 
   const onChangePassword = (e) => {
-    dispatch(setPassword(e.target.value));
+    dispatch(setProfilePassword(e.target.value));
   };
 
   const onChangeName = (e) => {
-    dispatch(setName(e.target.value));
+    dispatch(setProfileName(e.target.value));
   };
 
   const logoutUser = (e) => {

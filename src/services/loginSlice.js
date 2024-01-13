@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { login } from "../api";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const loginSlice = createSlice({
   name: "login",
@@ -17,12 +16,6 @@ export const loginSlice = createSlice({
   },
 });
 
-export const loginUser = createAsyncThunk(
-  "login/loginUser",
-  ({ email, password }) => {
-    return login(email, password);
-  }
-);
 
 export const selectPassword = (state) => state.login.password;
 
