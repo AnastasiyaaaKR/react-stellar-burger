@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./IngridientsList.module.css";
 import Ingridient from "../Ingridient/Ingridient";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import { Link } from "react-router-dom";
+import { IIngredient } from "../../../types";
 
-const IngridientsList = React.forwardRef(
+interface IIngridientsListProps {
+  name: string, 
+  type: string, 
+  ingredients: IIngredient[]
+  showIngridientsModal: (item: IIngredient) => void,
+}
+
+const IngridientsList = React.forwardRef<HTMLDivElement, IIngridientsListProps>(
   ({ name, type, ingredients, showIngridientsModal }, ref) => {
     const items = ingredients.filter((item) => {
       return item.type === type;
@@ -23,9 +29,6 @@ const IngridientsList = React.forwardRef(
                       showIngridientsModal(item);
                     }}
                     item={item}
-                    name={item.name}
-                    image={item.image}
-                    price={item.price}
                     key={item._id}
                   />
                 </Link>
@@ -37,12 +40,5 @@ const IngridientsList = React.forwardRef(
     );
   }
 );
-
-IngridientsList.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
-  ingredients: PropTypes.arrayOf(ingredientPropType),
-  showIngridientsModal: PropTypes.func,
-};
 
 export default IngridientsList;

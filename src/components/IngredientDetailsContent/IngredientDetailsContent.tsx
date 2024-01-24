@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./IngredientDetailsContent.module.css";
-import {ingredientPropType} from "../../utils/prop-types";
+import {IIngredient} from "../../../types";
 
-const IngredientDetailsContent = ({item}) => {
+interface IIngredientDetailsContentProps {
+  item: IIngredient
+}
+
+const IngredientDetailsContent = ({item}: IIngredientDetailsContentProps) => {
   return(
     <div>
       <div className={styles.image__wrapper}>
@@ -54,9 +58,5 @@ const IngredientDetailsContent = ({item}) => {
     </div>
   )
 };
-
-IngredientDetailsContent.propTypes = {
-  item: ingredientPropType,
-}
 
 export default IngredientDetailsContent;

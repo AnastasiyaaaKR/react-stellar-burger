@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import IngredientDetailsContent from "../../components/IngredientDetailsContent/IngredientDetailsContent";
 import {
   selectIngridients
-} from "../../services/IngridientsSlice";
+} from "../../services/IngredientsSlice";
 import { useSelector } from "react-redux";
 
 const IngredientPage = () => {

@@ -1,9 +1,12 @@
 import React from "react";
 import doneIcon from "../../images/done.png";
 import styles from "./OrderDetailsContent.module.css";
-import PropTypes from "prop-types";
 
-const OrderDetailsContent = ({orderNumber}) => {
+interface IorderNumberProps {
+  orderNumber: number
+}
+
+const OrderDetailsContent = ({orderNumber}: IorderNumberProps) => {
   return (
     <div className={styles.OrderDetailsContent__wrapper}>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>
@@ -18,9 +21,5 @@ const OrderDetailsContent = ({orderNumber}) => {
     </div>
   );
 };
-
-OrderDetailsContent.propTypes = {
-  orderNumber: PropTypes.number,
-}
 
 export default OrderDetailsContent;

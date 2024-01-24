@@ -3,7 +3,6 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
-import PropTypes from "prop-types";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import {
@@ -22,12 +21,17 @@ import { createOrder as createOrderAction } from "../../services/orderNumberSlic
 import {
   incrementCount,
   incrementCountBun,
-} from "../../services/IngridientsSlice";
+} from "../../services/IngredientsSlice";
+import { IIngredient } from "../../../types";
 
-const BurgerConstructor = ({ showModal }) => {
+interface IBurgerConstructorProps {
+  showModal: () => void;
+}
+
+const BurgerConstructor = ({ showModal }: IBurgerConstructorProps) => {
   const dispatch = useDispatch();
-  const createOrder = () => {
-    let arrOfIds = [];
+  const createOrder = (): void => {
+    let arrOfIds: string[] = [];
     for (const ingridient of constructorIngredients) {
       arrOfIds.push(ingridient._id);
     }
@@ -40,11 +44,11 @@ const BurgerConstructor = ({ showModal }) => {
       .then(() => dispatch(cleanBurgerIngridients()));
   };
 
-  const constructorIngredients = useSelector(selectConstructorIngridients);
+  const constructorIngredients: IIngredient[] = useSelector(selectConstructorIngridients);
   const constructorBun = useSelector(selectConstructorBun);
   const [, dropRef] = useDrop({
     accept: "ingridient",
-    drop(item) {
+    drop(item: IIngredient) {
       if (item.type === "bun") {
         dispatch(setBun(item));
         dispatch(incrementCountBun(item._id));
@@ -56,8 +60,8 @@ const BurgerConstructor = ({ showModal }) => {
     },
   });
 
-  const price = useMemo(() => {
-    let ingridientCost = 0;
+  const price: number = useMemo(() => {
+    let ingridientCost: number = 0;
     for (const inridient of constructorIngredients) {
       ingridientCost += inridient.price;
     }
@@ -112,7 +116,7 @@ const BurgerConstructor = ({ showModal }) => {
           {price}
         </p>
         <div className={`mr-10${styles.icon__wrapper}`}>
-          <CurrencyIcon type="primary" className="mr-10" />
+          <CurrencyIcon type="primary" />
         </div>
         <div className={`${styles.button__wrapper} ml-10`}>
           <Button
@@ -128,10 +132,6 @@ const BurgerConstructor = ({ showModal }) => {
       </div>
     </div>
   );
-};
-
-BurgerConstructor.propTypes = {
-  showModal: PropTypes.func,
 };
 
 export default BurgerConstructor;

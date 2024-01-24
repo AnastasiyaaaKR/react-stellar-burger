@@ -9,18 +9,22 @@ import {
   changeIngridients,
   removeIngridient,
 } from "../../services/constructorIngridientSlice";
-import { decrementCount } from "../../services/IngridientsSlice";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
+import { decrementCount } from "../../services/IngredientsSlice";
+import {IIngredient} from "../../../types";
 
-const ConstructorIngridient = ({ ingredient, index }) => {
+interface IConstructorIngridientProps {
+  ingredient: IIngredient,
+  index: number,
+}
+
+const ConstructorIngridient = ({ ingredient, index }: IConstructorIngridientProps) => {
   const dispatch = useDispatch();
-  const deleteBurgerIngridient = () => {
+  const deleteBurgerIngridient = (): void => {
     dispatch(removeIngridient(ingredient));
     dispatch(decrementCount(ingredient._id))
   };
-  const burgerArr = useSelector(selectConstructorIngridients);
-  const findIndex = (item) => {
+  const burgerArr: IIngredient[] = useSelector(selectConstructorIngridients);
+  const findIndex = (item: IIngredient): number => {
     return burgerArr.indexOf(item);
   };
   const [, dragRef] = useDrag({
@@ -30,7 +34,7 @@ const ConstructorIngridient = ({ ingredient, index }) => {
 
   const [, dropRef] = useDrop({
     accept: "sort",
-    hover({ data }) {
+    hover({ data }: { data: IIngredient }) {
       if (data._constId !== ingredient._constId) {
         dispatch(
           changeIngridients({
@@ -62,11 +66,6 @@ const ConstructorIngridient = ({ ingredient, index }) => {
       />
     </div>
   );
-};
-
-ConstructorIngridient.propTypes = {
-  index: PropTypes.number,
-  ingredient: ingredientPropType,
 };
 
 export default ConstructorIngridient;

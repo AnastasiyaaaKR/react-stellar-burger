@@ -1,14 +1,19 @@
 import React from "react";
 import Modal from "../Modal/Modal";
 import IngredientDetailsContent from "../IngredientDetailsContent/IngredientDetailsContent";
-import PropTypes from "prop-types";
-import {ingredientPropType} from "../../utils/prop-types";
+import {IIngredient} from "../../../types";
+
+interface IIngredientDetailsContentProps {
+  item: IIngredient,
+  fullInformation: boolean,
+  closeModal: () => void,
+}
 
 const IngredientDetailsModal = ({
   fullInformation,
   item,
   closeModal,
-}) => {
+}: IIngredientDetailsContentProps) => {
   if (fullInformation) {
     return (
       <Modal closeModal={closeModal} title="Детали ингредиента">
@@ -18,11 +23,5 @@ const IngredientDetailsModal = ({
   }
   return null;
 };
-
-IngredientDetailsModal.propTypes = {
-  item: ingredientPropType,
-  fullInformation: PropTypes.bool,
-  closeModal: PropTypes.func,
-}
 
 export default IngredientDetailsModal;

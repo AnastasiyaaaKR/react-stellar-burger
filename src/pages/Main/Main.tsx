@@ -6,13 +6,14 @@ import IngredientDetailsModal from "../../components/IngredientDetailsModal/Ingr
 import {
   selectIngridients,
   fetchIngridients,
-} from "../../services/IngridientsSlice";
+} from "../../services/IngredientsSlice";
 import {
   selectModalIngridient,
   setModalIngredient,
   deleteModalIngridient,
 } from "../../services/modalIngridientSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { IIngredient } from "../../../types";
 
 function Main() {
   const ingredients = useSelector(selectIngridients);
@@ -23,21 +24,21 @@ function Main() {
   }, []);
 
   const [visible, setVisible] = useState(false);
-  const showOrderDetails = () => {
+  const showOrderDetails = (): void => {
     setVisible(true);
   };
-  const closeOrderDetails = () => {
+  const closeOrderDetails = (): void => {
     setVisible(false);
   };
 
   const [fullInformation, setFullInformation] = useState(false);
   const modalIngredient = useSelector(selectModalIngridient);
-  const showIngridientDetails = (item) => {
+  const showIngridientDetails = (item: IIngredient): void => {
     setFullInformation(true);
     dispatch(setModalIngredient(item));
   };
 
-  const closeIngridientDetails = () => {
+  const closeIngridientDetails = (): void => {
     setFullInformation(false);
     dispatch(deleteModalIngridient());
   };

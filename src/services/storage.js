@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import ingridientsReducer from './IngridientsSlice'
+import ingredientsReducer from './IngredientsSlice'
 import modalIngridientReducer from "./modalIngridientSlice"
 import orderNumberReducer from "./orderNumberSlice";
 import constructorIngridientsReducer from "./constructorIngridientSlice";
@@ -12,7 +12,7 @@ import userReducer from './userSlice';
 
 export default configureStore({
   reducer: {
-    ingridients: ingridientsReducer,
+    ingredients: ingredientsReducer,
     modalIngridient: modalIngridientReducer,
     orderNumber: orderNumberReducer,
     constructorIngridients: constructorIngridientsReducer,

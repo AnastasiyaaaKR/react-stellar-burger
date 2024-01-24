@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import styles from "./Ingridients.module.css";
 import IngridientsList from "../IngridientsList/IngridientsList";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import { useInView } from "react-intersection-observer";
-import { setCurrentType } from "../../services/IngridientsSlice";
+import { setCurrentType } from "../../services/IngredientsSlice";
 import { useDispatch } from "react-redux";
+import { IIngredient } from "../../../types";
 
-const Ingridients = ({ ingredients, showIngridientsModal }) => {
+interface IIngridientsProps {
+  ingredients: IIngredient[], 
+  showIngridientsModal: (item: IIngredient) => void,
+}
+
+const Ingridients = ({ ingredients, showIngridientsModal }: IIngridientsProps) => {
 
   const dispatch = useDispatch();
   const [bunsRef, inViewBuns] = useInView({ 
@@ -57,11 +61,6 @@ const Ingridients = ({ ingredients, showIngridientsModal }) => {
       />
     </div>
   );
-};
-
-Ingridients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType),
-  showIngridientsModal: PropTypes.func,
 };
 
 export default Ingridients;

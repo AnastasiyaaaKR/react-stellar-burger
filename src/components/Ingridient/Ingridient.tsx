@@ -4,11 +4,15 @@ import {
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Ingridient.module.css";
-import PropTypes from "prop-types";
-import {ingredientPropType} from "../../utils/prop-types";
 import { useDrag } from "react-dnd";
+import {IIngredient} from "../../../types";
 
-const Ingridient = ({item, showIngridientsModal }) => {
+interface IIngridientProps {
+  item: IIngredient
+  showIngridientsModal: () => void,
+}
+
+const Ingridient = ({item, showIngridientsModal }: IIngridientProps) => {
   const[, dragRef]= useDrag({
     type: "ingridient", 
     item
@@ -35,10 +39,5 @@ const Ingridient = ({item, showIngridientsModal }) => {
     </div>
   );
 };
-
-Ingridient.propTypes = {
-  showIngridientsModal: PropTypes.func,
-  item: ingredientPropType,
-}
 
 export default Ingridient;

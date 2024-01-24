@@ -1,3 +1,5 @@
+import { IIngredient } from "../types";
+
 const baseUrl = "https://norma.nomoreparties.space/api";
 const domenUrl = `${baseUrl}/ingredients`;
 const createOrderUrl = `${baseUrl}/orders`;
@@ -21,7 +23,7 @@ export const getIngridients = () => {
   return fetch(domenUrl).then(getResponseData);
 };
 
-export const createOrder = (ingredients) => {
+export const createOrder = (ingredients: IIngredient[]) => {
   return fetch(createOrderUrl, {
     method: "POST",
     headers: {
@@ -33,7 +35,7 @@ export const createOrder = (ingredients) => {
   }).then(getResponseData);
 };
 
-export const forgotPassword = (email) => {
+export const forgotPassword = (email: string) => {
   return fetch(domenForgotPassword, {
     method: "POST",
     headers: {
@@ -45,7 +47,7 @@ export const forgotPassword = (email) => {
   }).then(getResponseData);
 };
 
-export const resetPassword = (token, password) => {
+export const resetPassword = (token: string, password: string) => {
   return fetch(domenResetPassword, {
     method: "POST",
     headers: {
@@ -58,7 +60,7 @@ export const resetPassword = (token, password) => {
   }).then(getResponseData);
 };
 
-export const registration = (email, password, name) => {
+export const registration = (email: string, password: string, name: string) => {
   return fetch(registerUrl, {
     method: "POST",
     headers: {
@@ -72,7 +74,7 @@ export const registration = (email, password, name) => {
   }).then(getResponseData);
 };
 
-export const login = (email, password) => {
+export const login = (email: string, password: string) => {
   return fetch(loginUrl, {
     method: "POST",
     headers: {
@@ -85,7 +87,7 @@ export const login = (email, password) => {
   }).then(getResponseData);
 };
 
-export const refreshAccessToken = (refreshToken) => {
+export const refreshAccessToken = (refreshToken: string) => {
   return fetch(tokenUrl, {
     method: "POST",
     headers: {
@@ -97,7 +99,7 @@ export const refreshAccessToken = (refreshToken) => {
   }).then(getResponseData);
 };
 
-export const logout = (refreshToken) => {
+export const logout = (refreshToken: string) => {
   return fetch(logoutUrl, {
     method: "POST",
     headers: {
@@ -119,7 +121,7 @@ export const getUser = () => {
   }).then(getResponseData);
 };
 
-export const updateUser = (name, email, password) => {
+export const updateUser = (name: string, email: string, password: string) => {
   return fetch(UserDataUrl, {
     method: "PATCH",
     headers: {

@@ -17,10 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const password = useSelector(selectPassword);
-  const token = useSelector(selectToken);
+  const password: string = useSelector(selectPassword);
+  const token: string = useSelector(selectToken);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (token && password) {
       dispatch(changePassword({token, password}))
@@ -28,11 +28,11 @@ const ResetPassword = () => {
     }
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setPassword(e.target.value));
   };
 
-  const onChangeToken = (e) => {
+  const onChangeToken = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setToken(e.target.value));
   };
 
@@ -42,12 +42,14 @@ const ResetPassword = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <PasswordInput
+            value = {password}
             name={"password"}
             placeholder="Введите новый пароль"
             extraClass="mb-6"
             onChange={onChangePassword}
           />
           <Input
+            value ={token}
             type={"text"}
             placeholder={"Введите код из письма"}
             name={"name"}

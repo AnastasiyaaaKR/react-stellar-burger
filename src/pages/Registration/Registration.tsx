@@ -20,30 +20,30 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
   const dispatch = useDispatch();
-  const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
-  const name = useSelector(selectName);
+  const email: string = useSelector(selectEmail);
+  const password: string = useSelector(selectPassword);
+  const name: string = useSelector(selectName);
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setPassword(e.target.value));
   };
 
-  const onChangeName = (e) => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setName(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (email && password && name) {
       dispatch(registerUser({ email, password, name }))
         .unwrap()
         .then((res) => {
-          localStorage.setItem('accessToken', res.accessToken);
-          localStorage.setItem('refreshToken', res.refreshToken);
+          localStorage.setItem("accessToken", res.accessToken);
+          localStorage.setItem("refreshToken", res.refreshToken);
         });
     }
   };
@@ -58,17 +58,21 @@ const Registration = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <Input
+            value={name}
             type={"text"}
             placeholder={"Имя"}
             extraClass="mb-6"
             onChange={onChangeName}
           />
           <EmailInput
+            value={email}
+            type="email"
             placeholder="E-mail"
             extraClass="mb-6"
             onChange={onChangeEmail}
           />
           <PasswordInput
+            type={"password"}
             name={"password"}
             extraClass="mb-6"
             onChange={onChangePassword}

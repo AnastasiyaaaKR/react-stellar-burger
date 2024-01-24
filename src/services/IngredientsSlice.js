@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getIngridients } from "../api";
 
-export const ingridientsSlice = createSlice({
-  name: "ingridients",
+export const ingredientsSlice = createSlice({
+  name: "ingredients",
   initialState: {
     value: [],
     currentType: "bun",
@@ -14,9 +14,9 @@ export const ingridientsSlice = createSlice({
     },
     incrementCountBun: (state, action) => {
       const el = state.value.find((el) => el._id === action.payload);
-      for (const ingridient of state.value) {
-        if (ingridient.type === "bun") {
-          ingridient.__v = 0;
+      for (const ingredient of state.value) {
+        if (ingredient.type === "bun") {
+          ingredient.__v = 0;
         }
       }
       el.__v = 1;
@@ -37,7 +37,7 @@ export const ingridientsSlice = createSlice({
 });
 
 export const fetchIngridients = createAsyncThunk(
-  "ingridients/fetchIngridients",
+  "ingredients/fetchIngridients",
   () => {
     return getIngridients().then((res) => {
       return res.data;
@@ -50,7 +50,7 @@ export const {
   incrementCountBun,
   decrementCount,
   setCurrentType,
-} = ingridientsSlice.actions;
-export const selectIngridients = (state) => state.ingridients.value;
-export const selectCurrentType = (state) => state.ingridients.currentType;
-export default ingridientsSlice.reducer;
+} = ingredientsSlice.actions;
+export const selectIngridients = (state) => state.ingredients.value;
+export const selectCurrentType = (state) => state.ingredients.currentType;
+export default ingredientsSlice.reducer;

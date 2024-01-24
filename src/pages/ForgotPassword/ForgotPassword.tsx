@@ -12,7 +12,7 @@ const ForgotPassword = () => {
   const dispatch = useDispatch();
   const email = useSelector(selectEmail);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(email) {
       dispatch(fetchEmail(email))
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
   };
 
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));
   };
 

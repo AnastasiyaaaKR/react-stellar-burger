@@ -20,7 +20,7 @@ import {
   selectChanged,
 } from "../../services/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { string } from "prop-types";
 
 const ProfileUser = () => {
   const dispatch = useDispatch();
@@ -34,31 +34,31 @@ const ProfileUser = () => {
     dispatch(getUser());
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (name && email) {
       dispatch(updateUser({ name, email, password }));
     }
   };
 
-  const resetUser = (e) => {
+  const resetUser = (e): void => {
     e.preventDefault();
     dispatch(resetData());
   };
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setProfileEmail(e.target.value));
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setProfilePassword(e.target.value));
   };
 
-  const onChangeName = (e) => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setProfileName(e.target.value));
   };
 
-  const logoutUser = (e) => {
+  const logoutUser = (e): void => {
     e.preventDefault();
     dispatch(logout(localStorage.getItem("refreshToken")));
   };
@@ -66,16 +66,16 @@ const ProfileUser = () => {
   return (
     <div className={styles.ProfileUser}>
       <div className={`${styles.ProfileUser__wrapper} mr-15`}>
-        <Link
+        <a 
           className={`text text_type_main-medium ${styles.ProfileUser__link}`}
         >
           Профиль
-        </Link>
-        <Link
+        </a>
+        <a
           className={`text text_type_main-medium ${styles.ProfileUser__link}`}
         >
           История заказов
-        </Link>
+        </a>
         <button
           className={`text text_type_main-medium ${styles.ProfileUser__button}`}
           onClick={logoutUser}

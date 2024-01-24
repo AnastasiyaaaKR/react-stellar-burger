@@ -20,15 +20,15 @@ const Authorisation = () => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setPassword(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (email && password) {
       dispatch(loginUser({ email, password }))
