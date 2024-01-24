@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { IIngredient } from "../../../types";
 
 function Main() {
-  const ingredients = useSelector(selectIngridients);
+  const ingredients:  IIngredient[]= useSelector(selectIngridients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Main() {
   };
 
   const [fullInformation, setFullInformation] = useState(false);
-  const modalIngredient = useSelector(selectModalIngridient);
+  const modalIngredient: IIngredient = useSelector(selectModalIngridient);
   const showIngridientDetails = (item: IIngredient): void => {
     setFullInformation(true);
     dispatch(setModalIngredient(item));

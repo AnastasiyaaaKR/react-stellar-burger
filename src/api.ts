@@ -12,18 +12,26 @@ const tokenUrl = `${authUrl}token`;
 const logoutUrl = `${authUrl}logout`;
 const UserDataUrl = `${authUrl}user`;
 
-function getResponseData(res) {
+function getResponseData(res: Response): Promise<any> {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
   return res.json();
 }
 
-export const getIngridients = () => {
+export const getIngridients = (): Promise<IIngredient[]> => {
   return fetch(domenUrl).then(getResponseData);
 };
 
-export const createOrder = (ingredients: IIngredient[]) => {
+export const createOrder = (
+  ingredients: IIngredient[]
+): Promise<{
+  name: string;
+  order: {
+    number: number;
+  };
+  success: boolean;
+}> => {
   return fetch(createOrderUrl, {
     method: "POST",
     headers: {
@@ -94,7 +102,7 @@ export const refreshAccessToken = (refreshToken: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-       token: refreshToken,
+      token: refreshToken,
     }),
   }).then(getResponseData);
 };
@@ -106,7 +114,7 @@ export const logout = (refreshToken: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-       token: refreshToken,
+      token: refreshToken,
     }),
   }).then(getResponseData);
 };
@@ -116,7 +124,7 @@ export const getUser = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem('accessToken')
+      authorization: localStorage.getItem("accessToken"),
     },
   }).then(getResponseData);
 };
@@ -126,13 +134,12 @@ export const updateUser = (name: string, email: string, password: string) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem('accessToken')
+      authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
-      name: name, 
+      name: name,
       email: email,
       password: password,
     }),
   }).then(getResponseData);
 };
-

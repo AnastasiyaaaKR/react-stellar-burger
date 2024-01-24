@@ -41,7 +41,10 @@ const Registration = () => {
     if (email && password && name) {
       dispatch(registerUser({ email, password, name }))
         .unwrap()
-        .then((res) => {
+        .then((res: {
+          accessToken: string,
+          refreshToken: string
+        }) => {
           localStorage.setItem("accessToken", res.accessToken);
           localStorage.setItem("refreshToken", res.refreshToken);
         });
@@ -66,13 +69,12 @@ const Registration = () => {
           />
           <EmailInput
             value={email}
-            type="email"
             placeholder="E-mail"
             extraClass="mb-6"
             onChange={onChangeEmail}
           />
           <PasswordInput
-            type={"password"}
+            value={password}
             name={"password"}
             extraClass="mb-6"
             onChange={onChangePassword}

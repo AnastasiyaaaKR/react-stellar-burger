@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 const ForgotPassword = () => {
 
   const dispatch = useDispatch();
-  const email = useSelector(selectEmail);
+  const email: string = useSelector(selectEmail);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if(email) {
       dispatch(fetchEmail(email))
@@ -33,7 +33,6 @@ const ForgotPassword = () => {
         <EmailInput
           value={email}
           name={"email"}
-          type="email"
           placeholder="Укажите e-mail"
           extraClass="mb-6"
           onChange={onChange}

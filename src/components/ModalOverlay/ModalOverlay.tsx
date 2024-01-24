@@ -2,16 +2,16 @@ import React, { useRef } from "react";
 import styles from "./ModalOverlay.module.css";
 
 interface IModalOverlayProps {
-  children?: React.ReactNode,
+  children: React.ReactNode,
   closeModal: () => void,
 }
 
 const ModalOverlay = ({ children, closeModal }: IModalOverlayProps) => {
-  const overlayRef = useRef();
+  const overlayRef = useRef<HTMLElement>(null);
 
-  const handleClick = (evt): void => {
+  const handleClick: React.MouseEventHandler<HTMLElement> = (evt): void => {
     if (evt.target === overlayRef.current) {
-      closeModal(styles.modal__wrapper);
+      closeModal();
     }
   };
   return (

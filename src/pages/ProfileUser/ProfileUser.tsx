@@ -20,28 +20,27 @@ import {
   selectChanged,
 } from "../../services/userSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { string } from "prop-types";
 
 const ProfileUser = () => {
   const dispatch = useDispatch();
 
-  const name = useSelector(selectprofileUserName);
-  const email = useSelector(selectprofileUserEmail);
-  const password = useSelector(selectprofileUserPassword);
+  const name: string = useSelector(selectprofileUserName);
+  const email: string = useSelector(selectprofileUserEmail);
+  const password: string = useSelector(selectprofileUserPassword);
   const changed = useSelector(selectChanged);
 
   React.useEffect(() => {
     dispatch(getUser());
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (name && email) {
       dispatch(updateUser({ name, email, password }));
     }
   };
 
-  const resetUser = (e): void => {
+  const resetUser: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     dispatch(resetData());
   };
@@ -58,7 +57,7 @@ const ProfileUser = () => {
     dispatch(setProfileName(e.target.value));
   };
 
-  const logoutUser = (e): void => {
+  const logoutUser: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
     dispatch(logout(localStorage.getItem("refreshToken")));
   };

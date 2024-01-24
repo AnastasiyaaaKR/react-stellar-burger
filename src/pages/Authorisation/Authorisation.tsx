@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Authorisation = () => {
   const dispatch = useDispatch();
-  const email = useSelector(selectEmail);
-  const password = useSelector(selectPassword);
+  const email: string = useSelector(selectEmail);
+  const password: string = useSelector(selectPassword);
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));
@@ -28,12 +28,16 @@ const Authorisation = () => {
     dispatch(setPassword(e.target.value));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (email && password) {
       dispatch(loginUser({ email, password }))
         .unwrap()
-        .then((res) => {
+        .then((res: {
+          user: {}
+          accessToken: string,
+          refreshToken: string,
+        }) => {
           localStorage.setItem("accessToken", res.accessToken);
           localStorage.setItem("refreshToken", res.refreshToken);
           dispatch(setUser(res.user));

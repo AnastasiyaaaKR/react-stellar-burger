@@ -2,11 +2,11 @@ import React from "react";
 import doneIcon from "../../images/done.png";
 import styles from "./OrderDetailsContent.module.css";
 
-interface IorderNumberProps {
+interface IOrderNumberProps {
   orderNumber: number
 }
 
-const OrderDetailsContent = ({orderNumber}: IorderNumberProps) => {
+const OrderDetailsContent = ({orderNumber}: IOrderNumberProps) => {
   return (
     <div className={styles.OrderDetailsContent__wrapper}>
       <p className="text text_type_digits-large mb-8">{orderNumber}</p>
