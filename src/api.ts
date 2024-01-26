@@ -43,7 +43,12 @@ export const createOrder = (
   }).then(getResponseData);
 };
 
-export const forgotPassword = (email: string) => {
+export const forgotPassword = (
+  email: string
+): Promise<{
+  success: boolean;
+  message: string;
+}> => {
   return fetch(domenForgotPassword, {
     method: "POST",
     headers: {
@@ -55,7 +60,13 @@ export const forgotPassword = (email: string) => {
   }).then(getResponseData);
 };
 
-export const resetPassword = (token: string, password: string) => {
+export const resetPassword = (
+  token: string,
+  password: string
+): Promise<{
+  success: boolean;
+  message: string;
+}> => {
   return fetch(domenResetPassword, {
     method: "POST",
     headers: {
@@ -68,7 +79,19 @@ export const resetPassword = (token: string, password: string) => {
   }).then(getResponseData);
 };
 
-export const registration = (email: string, password: string, name: string) => {
+export const registration = (
+  email: string,
+  password: string,
+  name: string
+): Promise<{
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+  };
+  accessToken: string;
+  refreshToken: string;
+}> => {
   return fetch(registerUrl, {
     method: "POST",
     headers: {
@@ -82,7 +105,18 @@ export const registration = (email: string, password: string, name: string) => {
   }).then(getResponseData);
 };
 
-export const login = (email: string, password: string) => {
+export const login = (
+  email: string,
+  password: string
+): Promise<{
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    email: string;
+    name: string;
+  };
+}> => {
   return fetch(loginUrl, {
     method: "POST",
     headers: {
@@ -95,7 +129,13 @@ export const login = (email: string, password: string) => {
   }).then(getResponseData);
 };
 
-export const refreshAccessToken = (refreshToken: string) => {
+export const refreshAccessToken = (
+  refreshToken: string
+): Promise<{
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+}> => {
   return fetch(tokenUrl, {
     method: "POST",
     headers: {
@@ -107,7 +147,12 @@ export const refreshAccessToken = (refreshToken: string) => {
   }).then(getResponseData);
 };
 
-export const logout = (refreshToken: string) => {
+export const logout = (
+  refreshToken: string
+): Promise<{
+  success: boolean;
+  message: string;
+}> => {
   return fetch(logoutUrl, {
     method: "POST",
     headers: {
@@ -119,7 +164,13 @@ export const logout = (refreshToken: string) => {
   }).then(getResponseData);
 };
 
-export const getUser = () => {
+export const getUser = (): Promise<{
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+  };
+}> => {
   return fetch(UserDataUrl, {
     method: "GET",
     headers: {
@@ -129,7 +180,17 @@ export const getUser = () => {
   }).then(getResponseData);
 };
 
-export const updateUser = (name: string, email: string, password: string) => {
+export const updateUser = (
+  name: string,
+  email: string,
+  password: string
+): Promise<{
+  success: boolean;
+  user: {
+    email: string;
+    name: string;
+  };
+}> => {
   return fetch(UserDataUrl, {
     method: "PATCH",
     headers: {
