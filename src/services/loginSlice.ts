@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../types";
 
 export const loginSlice = createSlice({
   name: "login",
@@ -17,9 +18,9 @@ export const loginSlice = createSlice({
 });
 
 
-export const selectPassword = (state) => state.login.password;
+export const selectPassword = (state: RootState) => state.login.password;
 
-export const selectEmail = (state) => state.login.email;
+export const selectEmail = (state: RootState) => state.login.email;
 
 export const { setEmail, setPassword } = loginSlice.actions;
 

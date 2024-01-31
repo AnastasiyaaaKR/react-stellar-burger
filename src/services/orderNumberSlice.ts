@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createOrder as createOrderApi } from "../api";
+import { RootState, IIngredient } from "../../types";
 
 export const orderNumberSlice = createSlice({
   name: "orderNumber",
@@ -20,14 +21,14 @@ export const orderNumberSlice = createSlice({
 
 export const createOrder = createAsyncThunk(
   "orderNumber/createOrder",
-  (ingredients) => {
+  (ingredients: string[]) => {
     return createOrderApi(ingredients).then((res) => {
       return res.order.number;
     });
   }
 );
 
-export const selectOrderNumber = (state) => state.orderNumber.value;
+export const selectOrderNumber = (state: RootState) => state.orderNumber.value;
 
 export const { setOrderNumber } = orderNumberSlice.actions;
 

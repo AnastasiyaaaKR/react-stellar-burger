@@ -22,14 +22,13 @@ import {
   incrementCount,
   incrementCountBun,
 } from "../../services/IngredientsSlice";
-import { IIngredient } from "../../../types";
-
+import { IIngredient, AppDispatch } from "../../../types";
 interface IBurgerConstructorProps {
   showModal: () => void;
 }
 
 const BurgerConstructor = ({ showModal }: IBurgerConstructorProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()as AppDispatch;
   const createOrder = (): void => {
     let arrOfIds: string[] = [];
     for (const ingridient of constructorIngredients) {

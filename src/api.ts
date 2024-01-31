@@ -19,12 +19,15 @@ function getResponseData(res: Response): Promise<any> {
   return res.json();
 }
 
-export const getIngridients = (): Promise<IIngredient[]> => {
+export const getIngridients = (): Promise<{
+  data: IIngredient[];
+  success: boolean;
+}> => {
   return fetch(domenUrl).then(getResponseData);
 };
 
 export const createOrder = (
-  ingredients: IIngredient[]
+  ingredients: string[]
 ): Promise<{
   name: string;
   order: {
@@ -171,11 +174,12 @@ export const getUser = (): Promise<{
     name: string;
   };
 }> => {
+  const accessToken = localStorage.getItem("accessToken");
   return fetch(UserDataUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken"),
+      authorization: accessToken ? accessToken : '',
     },
   }).then(getResponseData);
 };
@@ -183,7 +187,7 @@ export const getUser = (): Promise<{
 export const updateUser = (
   name: string,
   email: string,
-  password: string
+  password?: string
 ): Promise<{
   success: boolean;
   user: {
@@ -191,11 +195,12 @@ export const updateUser = (
     name: string;
   };
 }> => {
+  const accessToken = localStorage.getItem("accessToken");
   return fetch(UserDataUrl, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: localStorage.getItem("accessToken"),
+       authorization: accessToken ? accessToken : '',
     },
     body: JSON.stringify({
       name: name,

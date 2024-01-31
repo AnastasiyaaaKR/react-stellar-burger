@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { registration } from "../api";
+import { RootState, IUser } from "../../types";
 
 export const registrationSlice = createSlice({
   name: "registration",
@@ -23,16 +24,16 @@ export const registrationSlice = createSlice({
 
 export const registerUser = createAsyncThunk(
   "registration/registerUser",
-  ({email, password, name}) => {
+  ({email, password, name}: Required<IUser>) => {
     return registration(email, password, name);
   }
 );
 
-export const selectEmail = (state) => state.registration.email;
+export const selectEmail = (state: RootState) => state.registration.email;
 
-export const selectPassword = (state) => state.registration.password;
+export const selectPassword = (state: RootState) => state.registration.password;
 
-export const selectName = (state) => state.registration.name;
+export const selectName = (state: RootState) => state.registration.name;
 
 export const { setEmail, setPassword, setName} = registrationSlice.actions;
 

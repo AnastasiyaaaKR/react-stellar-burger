@@ -14,9 +14,10 @@ import {
   selectToken,
 } from "../../services/resetPasswordSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {AppDispatch} from "../../../types";
 
 const ResetPassword = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch() as AppDispatch;
   const password: string = useSelector(selectPassword);
   const token: string = useSelector(selectToken);
 

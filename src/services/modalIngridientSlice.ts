@@ -1,21 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState, IIngredient } from "../../types";
+
+type TinitialState = {
+   value: IIngredient | null,
+}
 
 export const modalIngridientSlice = createSlice({
   name: "modalIngridient",
   initialState: {
-    value: {},
-  },
+    value: null,
+  } as TinitialState,
   reducers: {
     setModalIngredient: (state, action) => {
       state.value = action.payload;
     },
     deleteModalIngridient: (state) => {
-      state.value = {};
+      state.value = null;
     },
   },
 });
 
-export const selectModalIngridient = (state) => state.modalIngridient.value;
+export const selectModalIngridient = (state: RootState) => state.modalIngridient.value;
 export const { setModalIngredient, deleteModalIngridient } =
   modalIngridientSlice.actions;
 export default modalIngridientSlice.reducer;

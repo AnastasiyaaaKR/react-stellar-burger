@@ -32,7 +32,7 @@ function Main() {
   };
 
   const [fullInformation, setFullInformation] = useState(false);
-  const modalIngredient: IIngredient = useSelector(selectModalIngridient);
+  const modalIngredient = useSelector(selectModalIngridient);
   const showIngridientDetails = (item: IIngredient): void => {
     setFullInformation(true);
     dispatch(setModalIngredient(item));
@@ -51,11 +51,11 @@ function Main() {
         showIngridientsModal={showIngridientDetails}
       />
       <OrderDetailsModal visible={visible} closeModal={closeOrderDetails} />
-      <IngredientDetailsModal
+      {modalIngredient && (<IngredientDetailsModal
         item={modalIngredient}
         fullInformation={fullInformation}
         closeModal={closeIngridientDetails}
-      />
+      />)}
     </div>
   );
 }

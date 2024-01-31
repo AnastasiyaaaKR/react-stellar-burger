@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState, IIngredient } from "../../types";
+
+type TinitialState = {
+  bun: IIngredient | null,
+  ingridients: IIngredient[],
+}
 
 export const constructorIngridientSlice = createSlice({
   name: "constructorIngridients",
   initialState: {
     bun: null,
     ingridients: [],
-  },
+  } as TinitialState,
   reducers: {
     setConstructorIngridients: (state, action) => {
       state.ingridients = action.payload;
@@ -34,9 +40,9 @@ export const constructorIngridientSlice = createSlice({
   },
 });
 
-export const selectConstructorIngridients = (state) =>
+export const selectConstructorIngridients = (state: RootState) =>
   state.constructorIngridients.ingridients;
-export const selectConstructorBun = (state) => state.constructorIngridients.bun;
+export const selectConstructorBun = (state: RootState) => state.constructorIngridients.bun;
 export const {
   setConstructorIngridients,
   addNewIngridient,

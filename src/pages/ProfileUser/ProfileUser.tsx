@@ -59,7 +59,10 @@ const ProfileUser = () => {
 
   const logoutUser: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    dispatch(logout(localStorage.getItem("refreshToken")));
+    const refreshToken = localStorage.getItem("refreshToken")
+    if(refreshToken) {
+      dispatch(logout(refreshToken));
+    }
   };
 
   return (

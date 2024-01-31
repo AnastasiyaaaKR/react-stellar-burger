@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { resetPassword } from "../api";
+import { RootState } from "../../types";
 
 export const resetPasswordSlice = createSlice({
   name: "resetPassword",
@@ -19,14 +20,17 @@ export const resetPasswordSlice = createSlice({
 
 export const changePassword = createAsyncThunk(
   "resetPassword/changePassword",
-  ({token, password}) => {
+  ({token, password}: {
+    token: string,
+    password: string
+  }) => {
     return resetPassword(token, password)
   }
 );
 
-export const selectPassword = (state) => state.resetPassword.password;
+export const selectPassword = (state: RootState) => state.resetPassword.password;
 
-export const selectToken = (state) => state.resetPassword.token;
+export const selectToken = (state: RootState) => state.resetPassword.token;
 
 export const { setToken, setPassword } = resetPasswordSlice.actions;
 

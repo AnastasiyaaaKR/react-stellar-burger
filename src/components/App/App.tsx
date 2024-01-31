@@ -10,18 +10,28 @@ import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 import NotFound from "../../pages/NotFound/NotFound";
 import AppHeader from "../AppHeader/AppHeader";
 import OrderFeed from "../../pages/OrderFeed/OrderFeed";
+import { OnlyAuth, OnlyUnAuth } from "../ProtectedRoute/ProtectedRoute";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../services/userSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppHeader />}>
           <Route index element={<Main />} />
-          <Route path="login" element={<Authorisation />} />
-          <Route path="register" element={<Registration />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
-          <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="profile" element={<ProfileUser />} />
+          <Route path="login" element={<OnlyUnAuth component={<Authorisation />} />}/>
+          <Route path="register" element={<OnlyUnAuth component={<Registration />}/>}/>
+          <Route path="forgot-password" element={<OnlyUnAuth component={<ForgotPassword />}/>} />
+          <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />}/>} />
+          <Route path="profile" element={<OnlyAuth component={<ProfileUser />}/>} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route path="order-feed" element={<OrderFeed />} />
           <Route path="*" element={<NotFound />} />

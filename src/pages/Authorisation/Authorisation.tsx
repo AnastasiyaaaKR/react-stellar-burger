@@ -14,9 +14,10 @@ import {
 } from "../../services/loginSlice";
 import { loginUser, setUser } from "../../services/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {AppDispatch} from "../../../types";
 
 const Authorisation = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch() as AppDispatch;
   const email: string = useSelector(selectEmail);
   const password: string = useSelector(selectPassword);
 

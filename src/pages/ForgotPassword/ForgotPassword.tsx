@@ -6,10 +6,11 @@ import {
 import styles from "./ForgotPassword.module.css";
 import { fetchEmail, setEmail, selectEmail } from "../../services/forgotPasswordSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../types";
 
 const ForgotPassword = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch() as AppDispatch;
   const email: string = useSelector(selectEmail);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {

@@ -1,3 +1,5 @@
+import storage from "./src/services/storage";
+
 export interface IIngredient {
   _id: string,
   name: string,
@@ -13,3 +15,18 @@ export interface IIngredient {
   __v: number,
   _constId?: string,
 };
+
+export interface ILoginUser {
+  email: string, 
+  password: string,
+}
+
+export interface IUser {
+  name: string,
+  email: string, 
+  password?: string,
+}
+
+export type AppDispatch = typeof storage.dispatch;
+
+export type RootState = ReturnType<typeof storage.getState>

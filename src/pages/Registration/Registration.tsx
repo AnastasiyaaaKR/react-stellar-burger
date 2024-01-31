@@ -17,9 +17,10 @@ import {
   selectName,
 } from "../../services/registrationSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../types"
 
 const Registration = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch() as AppDispatch;
   const email: string = useSelector(selectEmail);
   const password: string = useSelector(selectPassword);
   const name: string = useSelector(selectName);
