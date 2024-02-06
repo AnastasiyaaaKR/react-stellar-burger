@@ -8,6 +8,7 @@ import resetPasswordReducer from "./resetPasswordSlice";
 import registrationReducer from "./registrationSlice";
 import loginReducer from "./loginSlice";
 import userReducer from './userSlice';
+import ordersReducer from "./ordersFeedSlice";
 
 
 export default configureStore({
@@ -21,5 +22,6 @@ export default configureStore({
     registration: registrationReducer,
     login: loginReducer,
     user: userReducer,
+    orders: ordersReducer,
   }
 })

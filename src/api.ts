@@ -11,6 +11,7 @@ const loginUrl = `${authUrl}login`;
 const tokenUrl = `${authUrl}token`;
 const logoutUrl = `${authUrl}logout`;
 const UserDataUrl = `${authUrl}user`;
+const Orders = "wss://norma.nomoreparties.space/orders/all";
 
 function getResponseData(res: Response): Promise<any> {
   if (!res.ok) {
@@ -208,4 +209,23 @@ export const updateUser = (
       password: password,
     }),
   }).then(getResponseData);
+};
+
+export const getOrders = (): Promise<{
+  success: Boolean,
+  orders: [
+    {
+      ingredients: string[
+      ],
+      _id: string,
+      status: string,
+      number: number,
+      createdAt: string,
+      updatedAt: string
+    }
+  ],
+  total: number,
+  totalToday: number
+}> => {
+  return fetch(Orders).then(getResponseData);
 };

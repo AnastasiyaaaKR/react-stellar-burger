@@ -33,7 +33,7 @@ const App = () => {
           <Route path="reset-password" element={<OnlyUnAuth component={<ResetPassword />}/>} />
           <Route path="profile" element={<OnlyAuth component={<ProfileUser />}/>} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
-          <Route path="order-feed" element={<OrderFeed />} />
+          <Route path="feed" element={<OrderFeed />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

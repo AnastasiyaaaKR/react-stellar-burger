@@ -2,7 +2,7 @@
   max-width: 860px;
   display: flex;
   justify-content: center;
-  margin: 120px 0  0 200px;
+  margin: 120px 0  0 380px;
 }
 
 .ProfileUser__wrapper{
@@ -14,6 +14,7 @@
 .ProfileUser__link {
   text-decoration: none;
   color: #F2F2F3;
+  height: 64px;
 }
 
 .ProfileUser__button {
@@ -21,6 +22,7 @@
   border: none;
   background-color: transparent;
   text-align: left;
+  height: 64px;
 }
 
 .email__wparrer{
