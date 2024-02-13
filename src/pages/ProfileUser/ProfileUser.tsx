@@ -16,10 +16,10 @@ import {
   selectprofileUserEmail,
   selectprofileUserName,
   selectprofileUserPassword,
-  logout,
   selectChanged,
 } from "../../services/userSlice";
 import { useSelector, useDispatch } from "react-redux";
+import ProfileUserMenu from "../../components/ProfileUserMenu/ProfileUserMenu";
 
 const ProfileUser = () => {
   const dispatch = useDispatch();
@@ -57,38 +57,10 @@ const ProfileUser = () => {
     dispatch(setProfileName(e.target.value));
   };
 
-  const logoutUser: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    const refreshToken = localStorage.getItem("refreshToken")
-    if(refreshToken) {
-      dispatch(logout(refreshToken));
-    }
-  };
-
   return (
     <div className={styles.ProfileUser}>
-      <div className={`${styles.ProfileUser__wrapper} mr-15`}>
-        <a 
-          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
-        >
-          Профиль
-        </a>
-        <a
-          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
-        >
-          История заказов
-        </a>
-        <button
-          className={`text text_type_main-medium ${styles.ProfileUser__button}`}
-          onClick={logoutUser}
-        >
-          Выход
-        </button>
-        <p className="text text_type_main-default text_color_inactive mt-20">
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
-      </div>
-      <div>
+      <ProfileUserMenu/>
+      <div className={styles.ProfileUser__wrapper}>
         <form onSubmit={handleSubmit} onReset={resetUser}>
           <Input
             type="text"
@@ -135,8 +107,7 @@ const ProfileUser = () => {
                 Сохранить
               </Button>
             </div>
-          )
-        }
+          )}
         </form>
       </div>
     </div>

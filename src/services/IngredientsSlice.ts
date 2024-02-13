@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getIngridients } from "../api";
-import { RootState, IIngredient } from "../../types";
+import { IIngredient } from "../../types";
+import { RootState } from "./storage";
 
 type TinitialState = {
   value: IIngredient[],

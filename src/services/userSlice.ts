@@ -6,7 +6,8 @@ import {
   refreshAccessToken,
   logout as logoutApi,
 } from "../api";
-import { ILoginUser, IUser, RootState } from "../../types";
+import { ILoginUser, IUser } from "../../types";
+import { RootState } from "./storage";
 
 type TinitialState = {
   user: IUser | null;

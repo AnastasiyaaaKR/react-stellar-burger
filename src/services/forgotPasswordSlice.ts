@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { forgotPassword } from "../api";
-import { RootState } from "../../types";
+import { RootState } from "./storage";
 
 export const forgotPasswordSlice = createSlice({
   name: "forgotPassword",

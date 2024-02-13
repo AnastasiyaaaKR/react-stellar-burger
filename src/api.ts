@@ -211,21 +211,7 @@ export const updateUser = (
   }).then(getResponseData);
 };
 
-export const getOrders = (): Promise<{
-  success: Boolean,
-  orders: [
-    {
-      ingredients: string[
-      ],
-      _id: string,
-      status: string,
-      number: number,
-      createdAt: string,
-      updatedAt: string
-    }
-  ],
-  total: number,
-  totalToday: number
-}> => {
-  return fetch(Orders).then(getResponseData);
+export const getOrders = (): WebSocket => {
+  const ws = new WebSocket(Orders);
+  return ws;
 };

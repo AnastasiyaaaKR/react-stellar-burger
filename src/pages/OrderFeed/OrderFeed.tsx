@@ -6,9 +6,9 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 const OrderFeed = () => {
   return (
     <div className={styles.OrderFeed__wrapper}>
-      <div className={`${styles.orders__wrapper} custom-scroll`}>
+      <div className={`${styles.orders__wrapper} custom-scroll mr-15`}>
         <h1 className="text text_type_main-medium mb-5">Лента заказов</h1>
-        <div>
+        <div className="mr-2">
           <div className="mb-4">
             <div className={styles.order__wrapper}>
               <div className={`${styles.order__header} pt-6`}>

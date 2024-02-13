@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createOrder as createOrderApi } from "../api";
-import { RootState, IIngredient } from "../../types";
+import { RootState } from "./storage";
 
 export const orderNumberSlice = createSlice({
   name: "orderNumber",

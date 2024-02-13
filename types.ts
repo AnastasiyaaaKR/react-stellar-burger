@@ -37,5 +37,3 @@ export interface IOrder {
 }
 
 export type AppDispatch = typeof storage.dispatch;
-
-export type RootState = ReturnType<typeof storage.getState>
