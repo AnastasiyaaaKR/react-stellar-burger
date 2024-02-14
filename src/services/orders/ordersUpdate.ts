@@ -8,20 +8,20 @@ import {
   Move as OrdersMoveAction,
 } from "./types";
 
-const insertData = (table: Orders, action: OrdersInsertAction): Orders => {
+const insertData = (orders: Orders, action: OrdersInsertAction): Orders => {
   return [
-    ...table.slice(0, action.data.pos),
+    ...orders.slice(0, action.data.pos),
     ...action.data.rows,
-    ...table.slice(action.data.pos),
+    ...orders.slice(action.data.pos),
   ];
 };
 
-const deleteData = (table: Orders, action: OrdersDeleteAction): Orders => {
-  return table.filter(({ id }) => !action.data.includes(id));
+const deleteData = (orders: Orders, action: OrdersDeleteAction): Orders => {
+  return orders.filter(({ id }) => !action.data.includes(id));
 };
 
-const updateData = (table: Orders, action: OrdersUpdateAction): Orders => {
-  return table.map((row) => {
+const updateData = (orders: Orders, action: OrdersUpdateAction): Orders => {
+  return orders.map((row) => {
     const index = action.data.findIndex(
       (updatedRow) => updatedRow.id === row.id
     );
@@ -32,38 +32,38 @@ const updateData = (table: Orders, action: OrdersUpdateAction): Orders => {
   });
 };
 
-const moveData = (prevTable: Orders, action: OrdersMoveAction): Orders => {
-  const table = [...prevTable];
+const moveData = (prevOrders: Orders, action: OrdersMoveAction): Orders => {
+  const orders = [...prevOrders];
   action.data.forEach((move) => {
-    table.splice(move.to, 0, table.splice(move.from, 1)[0]);
+    orders.splice(move.to, 0, orders.splice(move.from, 1)[0]);
   });
-  return table;
+  return orders;
 };
 
 export const ordersUpdate = (
-  prevTable: Orders,
+  prevOrders: Orders,
   actions: OrdersActions
 ): Orders => {
-  let table = prevTable;
+  let orders = prevOrders;
   actions.forEach((action) => {
     switch (action.type) {
       case OrdersActionType.DATA:
-        table = action.data;
+        orders = action.data;
         break;
       case OrdersActionType.INSERT:
-        table = insertData(table, action);
+        orders = insertData(orders, action);
         break;
       case OrdersActionType.DELETE:
-        table = deleteData(table, action);
+        orders = deleteData(orders, action);
         break;
       case OrdersActionType.UPDATE:
-        table = updateData(table, action);
+        orders = updateData(orders, action);
         break;
       case OrdersActionType.MOVE:
-        table = moveData(table, action);
+        orders = moveData(orders, action);
         break;
     }
   });
 
-  return table;
+  return orders;
 };

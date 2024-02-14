@@ -8,16 +8,16 @@ import resetPasswordReducer from "./resetPasswordSlice";
 import registrationReducer from "./registrationSlice";
 import loginReducer from "./loginSlice";
 import userReducer from "./userSlice";
-import { ordersReducer }from './orders/reducer';
+import { ordersReducer } from "./orders/reducer";
 import { socketMiddleware } from "./socketMiddleware";
-import { 
-  connect as OrdersWsConnect, 
+import {
+  connect as OrdersWsConnect,
   disconnect as OrdersWsDisconnect,
   wsConnecting as OrdersWsConnecting,
   wsOpen as OrdersWsOpen,
   wsClose as OrdersWsClose,
   wsMessage as OrdersWsNessage,
-  wsError as OrdersWsError 
+  wsError as OrdersWsError,
 } from "./orders/actions";
 
 const rootReducer = combineReducers({

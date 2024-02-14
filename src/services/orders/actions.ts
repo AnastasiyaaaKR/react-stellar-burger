@@ -1,5 +1,6 @@
-import { OrdersActions } from "./types";
+import { IOrders } from "../../../types";
 import { createAction } from "@reduxjs/toolkit";
+
 
 export const connect = createAction<string, "ORDERS_CONNECT">(
   "ORDERS_CONNECT"
@@ -9,7 +10,7 @@ export const wsConnecting = createAction("ORDERS_WS_CONNECTING");
 export const wsOpen = createAction("ORDERS_WS_OPEN");
 export const wsClose = createAction("ORDERS_WS_CLOSE");
 export const wsMessage = createAction<
-  OrdersActions,
+  IOrders,
   "ORDERS_WS_MESSAGE"
 >("ORDERS_WS_MESSAGE");
 export const wsError = createAction<string, "ORDERS_WS_ERROR">(

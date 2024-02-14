@@ -2,11 +2,12 @@ import { Orders, WebsocketStatus } from "./types";
 import { createReducer } from "@reduxjs/toolkit";
 import { ordersUpdate } from "./ordersUpdate";
 import { wsOpen, wsClose, wsMessage, wsError, wsConnecting } from "./actions";
+import { IOrder } from "../../../types";
 
 export type OrdersStore = {
   status: WebsocketStatus;
   connectionError: string;
-  orders: Orders;
+  orders: IOrder[];
 };
 
 const initialState: OrdersStore = {
@@ -31,6 +32,6 @@ export const ordersReducer = createReducer(initialState, (builder) => {
       state.connectionError = action.payload;
     })
     .addCase(wsMessage, (state, action) => {
-      state.orders = ordersUpdate(state.orders, action.payload);
+      state.orders = action.payload.orders;
     });
 });

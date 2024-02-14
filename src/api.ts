@@ -11,7 +11,6 @@ const loginUrl = `${authUrl}login`;
 const tokenUrl = `${authUrl}token`;
 const logoutUrl = `${authUrl}logout`;
 const UserDataUrl = `${authUrl}user`;
-const Orders = "wss://norma.nomoreparties.space/orders/all";
 
 function getResponseData(res: Response): Promise<any> {
   if (!res.ok) {
@@ -211,7 +210,3 @@ export const updateUser = (
   }).then(getResponseData);
 };
 
-export const getOrders = (): WebSocket => {
-  const ws = new WebSocket(Orders);
-  return ws;
-};

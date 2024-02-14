@@ -8,7 +8,7 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 852px;
+  height: 812px;
 }
 
 .order__wrapper{
@@ -17,6 +17,7 @@
   background-color: #1c1c21;
   border-radius: 40px;
   height: 214px;
+  margin-right: 8px;
 }
 
 .order__header{
@@ -32,6 +33,14 @@
 .cost__wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.ingridients__img {
+  width: 64px;
+  height: 64px;
+  border: 3px solid #801ab2;
+  border-radius: 50%;
+  object-fit: contain;
 }
 
 .informationBoard {

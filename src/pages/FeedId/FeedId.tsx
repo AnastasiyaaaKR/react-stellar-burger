@@ -11,7 +11,7 @@ const FeedId = () => {
       <p className="text text_type_main-medium mb-3">Black Hole Singularity острый бургер</p>
       <p className={`${styles.FeedId__status} mb-15 text text_type_main-default`}>Выполнен</p>
       <p className="text text_type_main-medium mb-6">Состав:</p>
-      <ul className={`${styles.FeedId__list} mb-10`}>
+      <ul className={`${styles.FeedId__list}`}>
         <li className={`${styles.FeedId__item} mb-4`}>
              <div className={styles.img__wrapper}>
             <img className={styles.FeedId__img} src={ingredient}></img>
@@ -53,9 +53,12 @@ const FeedId = () => {
           </div>
         </li>
       </ul>
-      <div>
-        <p></p>
-        <p></p>
+      <div className={`${styles.finalyPrice__wrapper} mt-10`}>
+        <p className="text text_type_main-default text_color_inactive">Вчера, 13:50</p>
+        <div className={styles.price__wrapper}>
+          <p className="text text_type_digits-default mr-2">510</p>
+          <CurrencyIcon type="primary" />
+        </div>
       </div>
     </div>
   );

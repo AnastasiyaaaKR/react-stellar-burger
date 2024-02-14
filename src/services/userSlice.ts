@@ -75,8 +75,8 @@ export const userSlice = createSlice({
       state.isAuthChecked = true;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
-      state.profileUser.email = '';
-      state.profileUser.name = ''
+      state.profileUser.email = "";
+      state.profileUser.name = "";
       state.user = null;
     });
   },

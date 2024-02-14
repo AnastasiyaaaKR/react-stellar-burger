@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./OrderFeed.module.css";
 import ingredient from "../../images/ingredient.png";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {connect as connectOrders, disconnect as disconnectOrders} from '../../services/orders/actions';
+import { useDispatch } from "react-redux";
+
+const ordersServerUrl = "wss://norma.nomoreparties.space/orders/all";
 
 const OrderFeed = () => {
+
+  const dispatch = useDispatch();
+
+  const connect = () => dispatch(connectOrders(ordersServerUrl));
+
+  // const disconnect = () => dispatch(disconnectOrders());
+
+   useEffect(() => {
+    connect();
+  }, [dispatch]);
+
   return (
     <div className={styles.OrderFeed__wrapper}>
-      <div className={`${styles.orders__wrapper} custom-scroll mr-15`}>
-        <h1 className="text text_type_main-medium mb-5">Лента заказов</h1>
-        <div className="mr-2">
+      <div className="mr-15">
+        <h1 className="text text_type_main-large mb-5">Лента заказов</h1>
+        <div className={`${styles.orders__wrapper} mr-2 custom-scroll`}>
           <div className="mb-4">
             <div className={styles.order__wrapper}>
               <div className={`${styles.order__header} pt-6`}>
@@ -23,11 +38,11 @@ const OrderFeed = () => {
               <div className="mt-6 mb-6">
                 <div className={styles.cost__wrapper}>
                   <div>
-                    <img src={ingredient}></img>
-                    <img src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
                   </div>
                   <div className={styles.cost__wrapper}>
-                    <p className="text text_type_digits-default">480</p>
+                    <p className="text text_type_digits-default mr-2">480</p>
                     <CurrencyIcon type="primary" />
                   </div>
                 </div>
@@ -48,11 +63,11 @@ const OrderFeed = () => {
               <div className="mt-6 mb-6">
                 <div className={styles.cost__wrapper}>
                   <div>
-                    <img src={ingredient}></img>
-                    <img src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
                   </div>
                   <div className={styles.cost__wrapper}>
-                    <p className="text text_type_digits-default">480</p>
+                    <p className="text text_type_digits-default mr-2">480</p>
                     <CurrencyIcon type="primary" />
                   </div>
                 </div>
@@ -73,11 +88,11 @@ const OrderFeed = () => {
               <div className="mt-6 mb-6">
                 <div className={styles.cost__wrapper}>
                   <div>
-                    <img src={ingredient}></img>
-                    <img src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
+                    <img className={styles.ingridients__img} src={ingredient}></img>
                   </div>
                   <div className={styles.cost__wrapper}>
-                    <p className="text text_type_digits-default">480</p>
+                    <p className="text text_type_digits-default mr-2">480</p>
                     <CurrencyIcon type="primary" />
                   </div>
                 </div>
