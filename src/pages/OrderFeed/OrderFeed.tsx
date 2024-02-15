@@ -11,12 +11,10 @@ const OrderFeed = () => {
 
   const dispatch = useDispatch();
 
-  const connect = () => dispatch(connectOrders(ordersServerUrl));
-
   // const disconnect = () => dispatch(disconnectOrders());
 
    useEffect(() => {
-    connect();
+    dispatch(connectOrders(ordersServerUrl));
   }, [dispatch]);
 
   return (
