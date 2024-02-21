@@ -28,6 +28,7 @@ export interface IUser {
 }
 
 export interface IOrder {
+  name: string;
   ingredients: string[],
   _id: string,
   status: string,
