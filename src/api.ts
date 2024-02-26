@@ -35,10 +35,12 @@ export const createOrder = (
   };
   success: boolean;
 }> => {
+  const accessToken = localStorage.getItem("accessToken");
   return fetch(createOrderUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+       authorization: accessToken ? accessToken : '',
     },
     body: JSON.stringify({
       ingredients,

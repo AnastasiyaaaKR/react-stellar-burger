@@ -24,15 +24,19 @@ function Main() {
   }, []);
 
   const [visible, setVisible] = useState(false);
+
   const showOrderDetails = (): void => {
     setVisible(true);
   };
+
   const closeOrderDetails = (): void => {
     setVisible(false);
   };
 
   const [fullInformation, setFullInformation] = useState(false);
+
   const modalIngredient = useSelector(selectModalIngridient);
+
   const showIngridientDetails = (item: IIngredient): void => {
     setFullInformation(true);
     dispatch(setModalIngredient(item));

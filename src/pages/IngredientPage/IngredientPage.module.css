@@ -1,4 +1,9 @@
 .Ingredient__wrapper {
   width: 640px;
-height: 575px;
+  height: 575px;
+  margin: 120px 640px 0;
+}
+
+.Ingredient__header {
+  text-align: center;
 }

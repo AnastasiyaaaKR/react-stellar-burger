@@ -1,13 +1,12 @@
-.IngridientsList__section {
-  max-width: 600px;
-}
-
 .IngridientsList {
+  width: 600px;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .IngridientsList__link {
   text-decoration: none;
-  color: #F2F2F3;
+  color: #f2f2f3;
 }

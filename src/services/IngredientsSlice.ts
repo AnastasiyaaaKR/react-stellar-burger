@@ -64,6 +64,7 @@ export const {
   decrementCount,
   setCurrentType,
 } = ingredientsSlice.actions;
+
 export const selectIngridients = (state: RootState) => state.ingredients.value;
 export const selectCurrentType = (state: RootState) => state.ingredients.currentType;
 export default ingredientsSlice.reducer;

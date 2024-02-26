@@ -9,17 +9,15 @@ import {IIngredient} from "../../../types";
 
 interface IIngridientProps {
   item: IIngredient
-  showIngridientsModal: () => void,
 }
 
-const Ingridient = ({item, showIngridientsModal }: IIngridientProps) => {
+const Ingridient = ({item }: IIngridientProps) => {
   const[, dragRef]= useDrag({
     type: "ingridient", 
     item
   })
   return (
     <div
-      onClick={showIngridientsModal}
       className={`${styles.ingridient__wpapper} mt-6 ml-4 mr-6`}
       ref={dragRef}
     >
