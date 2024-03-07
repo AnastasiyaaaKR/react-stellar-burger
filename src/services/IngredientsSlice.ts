@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getIngridients } from "../api";
-import { RootState, IIngredient } from "../../types";
+import { IIngredient } from "../../types";
+import { RootState } from "./storage";
 
 type TinitialState = {
   value: IIngredient[],
@@ -63,6 +64,7 @@ export const {
   decrementCount,
   setCurrentType,
 } = ingredientsSlice.actions;
+
 export const selectIngridients = (state: RootState) => state.ingredients.value;
 export const selectCurrentType = (state: RootState) => state.ingredients.currentType;
 export default ingredientsSlice.reducer;

@@ -2,25 +2,11 @@
   max-width: 860px;
   display: flex;
   justify-content: center;
-  margin: 120px 0  0 200px;
+  margin: 0 0 0 380px;
 }
 
 .ProfileUser__wrapper{
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-}
-
-.ProfileUser__link {
-  text-decoration: none;
-  color: #F2F2F3;
-}
-
-.ProfileUser__button {
-  color: #F2F2F3;
-  border: none;
-  background-color: transparent;
-  text-align: left;
+  margin-top: 100px;
 }
 
 .email__wparrer{

@@ -27,6 +27,19 @@ export interface IUser {
   password?: string,
 }
 
-export type AppDispatch = typeof storage.dispatch;
+export interface IOrder {
+  name: string;
+  ingredients: string[],
+  _id: string,
+  status: string,
+  number: number,
+  createdAt: string,
+  updatedAt: string,
+}
 
-export type RootState = ReturnType<typeof storage.getState>
+export interface IOrders {
+  success: boolean,
+  orders: IOrder[],
+  total: number,
+  totalToday: number
+}

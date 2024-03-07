@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { registration } from "../api";
-import { RootState, IUser } from "../../types";
+import { IUser } from "../../types";
+import { RootState } from "./storage";
 
 export const registrationSlice = createSlice({
   name: "registration",

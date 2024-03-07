@@ -4,7 +4,6 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import { useDrop } from "react-dnd";
-import { useDispatch } from "react-redux";
 import {
   addNewIngridient,
   setBun,
@@ -14,7 +13,6 @@ import {
   selectConstructorBun,
   cleanBurgerIngridients,
 } from "../../services/constructorIngridientSlice";
-import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import ConstructorIngridient from "../ConstructorIngridient/ConstructorIngridient";
 import { createOrder as createOrderAction } from "../../services/orderNumberSlice";
@@ -22,14 +20,24 @@ import {
   incrementCount,
   incrementCountBun,
 } from "../../services/IngredientsSlice";
-import { IIngredient, AppDispatch } from "../../../types";
+import { IIngredient } from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
+import { useLocation, useNavigate } from "react-router-dom";
 interface IBurgerConstructorProps {
   showModal: () => void;
 }
 
 const BurgerConstructor = ({ showModal }: IBurgerConstructorProps) => {
-  const dispatch = useDispatch()as AppDispatch;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = useAppSelector((store) => store.user.user);
+  const dispatch = useAppDispatch();
+
   const createOrder = (): void => {
+    if (!user) {
+      navigate("/login", { state: { from: location.pathname } });
+      return;
+    }
     let arrOfIds: string[] = [];
     for (const ingridient of constructorIngredients) {
       arrOfIds.push(ingridient._id);
@@ -43,8 +51,8 @@ const BurgerConstructor = ({ showModal }: IBurgerConstructorProps) => {
       .then(() => dispatch(cleanBurgerIngridients()));
   };
 
-  const constructorIngredients: IIngredient[] = useSelector(selectConstructorIngridients);
-  const constructorBun = useSelector(selectConstructorBun);
+  const constructorIngredients: IIngredient[] = useAppSelector(selectConstructorIngridients);
+  const constructorBun = useAppSelector(selectConstructorBun);
   const [, dropRef] = useDrop({
     accept: "ingridient",
     drop(item: IIngredient) {

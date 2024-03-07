@@ -16,14 +16,13 @@ import {
   selectPassword,
   selectName,
 } from "../../services/registrationSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../types"
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const Registration = () => {
-  const dispatch = useDispatch() as AppDispatch;
-  const email: string = useSelector(selectEmail);
-  const password: string = useSelector(selectPassword);
-  const name: string = useSelector(selectName);
+  const dispatch = useAppDispatch()
+  const email: string = useAppSelector(selectEmail);
+  const password: string = useAppSelector(selectPassword);
+  const name: string = useAppSelector(selectName);
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));

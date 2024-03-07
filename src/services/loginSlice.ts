@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../types";
+import { RootState } from "./storage";
 
 export const loginSlice = createSlice({
   name: "login",

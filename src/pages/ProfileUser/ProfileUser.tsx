@@ -16,18 +16,18 @@ import {
   selectprofileUserEmail,
   selectprofileUserName,
   selectprofileUserPassword,
-  logout,
   selectChanged,
 } from "../../services/userSlice";
-import { useSelector, useDispatch } from "react-redux";
+import ProfileUserMenu from "../../components/ProfileUserMenu/ProfileUserMenu";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const ProfileUser = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const name: string = useSelector(selectprofileUserName);
-  const email: string = useSelector(selectprofileUserEmail);
-  const password: string = useSelector(selectprofileUserPassword);
-  const changed = useSelector(selectChanged);
+  const name: string = useAppSelector(selectprofileUserName);
+  const email: string = useAppSelector(selectprofileUserEmail);
+  const password: string = useAppSelector(selectprofileUserPassword);
+  const changed = useAppSelector(selectChanged);
 
   React.useEffect(() => {
     dispatch(getUser());
@@ -57,38 +57,10 @@ const ProfileUser = () => {
     dispatch(setProfileName(e.target.value));
   };
 
-  const logoutUser: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault();
-    const refreshToken = localStorage.getItem("refreshToken")
-    if(refreshToken) {
-      dispatch(logout(refreshToken));
-    }
-  };
-
   return (
     <div className={styles.ProfileUser}>
-      <div className={`${styles.ProfileUser__wrapper} mr-15`}>
-        <a 
-          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
-        >
-          Профиль
-        </a>
-        <a
-          className={`text text_type_main-medium ${styles.ProfileUser__link}`}
-        >
-          История заказов
-        </a>
-        <button
-          className={`text text_type_main-medium ${styles.ProfileUser__button}`}
-          onClick={logoutUser}
-        >
-          Выход
-        </button>
-        <p className="text text_type_main-default text_color_inactive mt-20">
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
-      </div>
-      <div>
+      <ProfileUserMenu/>
+      <div className={styles.ProfileUser__wrapper}>
         <form onSubmit={handleSubmit} onReset={resetUser}>
           <Input
             type="text"
@@ -135,8 +107,7 @@ const ProfileUser = () => {
                 Сохранить
               </Button>
             </div>
-          )
-        }
+          )}
         </form>
       </div>
     </div>

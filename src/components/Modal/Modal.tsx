@@ -14,14 +14,14 @@ interface IModalProps {
 
 const Modal = ({ closeModal, children, title }: IModalProps) => {
   useEffect(() => {
-    function closeByEscape(evt: any): void {
+    function closeByEscape(evt: KeyboardEvent): void {
       if (evt.key === "Escape") {
         closeModal();
       }
     }
     document.addEventListener("keydown", closeByEscape);
     return () => {
-      document.removeEventListener("keydown", closeByEscape);
+    document.removeEventListener("keydown", closeByEscape);
     };
   }, []);
 

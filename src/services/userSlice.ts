@@ -6,7 +6,8 @@ import {
   refreshAccessToken,
   logout as logoutApi,
 } from "../api";
-import { ILoginUser, IUser, RootState } from "../../types";
+import { ILoginUser, IUser } from "../../types";
+import { RootState } from "./storage";
 
 type TinitialState = {
   user: IUser | null;
@@ -74,8 +75,8 @@ export const userSlice = createSlice({
       state.isAuthChecked = true;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
-      state.profileUser.email = '';
-      state.profileUser.name = ''
+      state.profileUser.email = "";
+      state.profileUser.name = "";
       state.user = null;
     });
   },

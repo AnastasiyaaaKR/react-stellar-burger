@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import styles from "./IngredientPage.module.css";
 import { useParams } from "react-router";
 import IngredientDetailsContent from "../../components/IngredientDetailsContent/IngredientDetailsContent";
-import { selectIngridients } from "../../services/IngredientsSlice";
-import { useSelector } from "react-redux";
+import {
+  selectIngridients,
+} from "../../services/IngredientsSlice";
 import { IIngredient } from "../../../types";
+import { useAppSelector } from "../../services/storage";
 
 const IngredientPage = () => {
-  const ingredients: IIngredient[] = useSelector(selectIngridients);
+  const ingredients: IIngredient[] = useAppSelector(selectIngridients);
   const params = useParams();
-  const [ingredient, ] = useState(null);
 
-  function findIngridient(paramsId: string | undefined): IIngredient | undefined {
+  function findIngridient(): IIngredient | undefined {
     for (const ingredient of ingredients) {
-      if (paramsId === ingredient._id) {
+      if (params.id === ingredient._id) {
         return ingredient;
       }
     }
   }
 
-  useEffect(() => {
-    findIngridient(params._id);
-  }, [params]);
+  const ingredient = useMemo(findIngridient, [params.id, ingredients]);
 
-  return (
-    ingredient && (
-      <div className={styles.Ingredient__wrapper}>
-        <IngredientDetailsContent item={ingredient} />
-      </div>
-    )
-  );
+  if (ingredient) {
+    return (
+        <div className={styles.Ingredient__wrapper}>
+          <h1 className={`${styles.Ingredient__header} text text_type_main-medium`}>Детали ингредиента</h1>
+          <IngredientDetailsContent item={ingredient} />
+        </div>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default IngredientPage;

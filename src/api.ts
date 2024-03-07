@@ -1,11 +1,12 @@
 import { IIngredient } from "../types";
 
+export const wsBaseUrl = "wss://norma.nomoreparties.space/orders"
 const baseUrl = "https://norma.nomoreparties.space/api";
 const domenUrl = `${baseUrl}/ingredients`;
 const createOrderUrl = `${baseUrl}/orders`;
 const domenForgotPassword = `${baseUrl}/password-reset`;
 const domenResetPassword = `${baseUrl}/password-reset/reset`;
-const authUrl = "https://norma.nomoreparties.space/api/auth/";
+const authUrl = `${baseUrl}/auth/`;
 const registerUrl = `${authUrl}register`;
 const loginUrl = `${authUrl}login`;
 const tokenUrl = `${authUrl}token`;
@@ -35,10 +36,12 @@ export const createOrder = (
   };
   success: boolean;
 }> => {
+  const accessToken = localStorage.getItem("accessToken");
   return fetch(createOrderUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+       authorization: accessToken ? accessToken : '',
     },
     body: JSON.stringify({
       ingredients,
@@ -209,3 +212,4 @@ export const updateUser = (
     }),
   }).then(getResponseData);
 };
+

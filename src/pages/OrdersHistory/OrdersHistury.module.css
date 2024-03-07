@@ -1,0 +1,36 @@
+.OrdersHistory__wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 380px 0 380px;
+}
+
+.OrdersHistory__list {
+  width: 844px;
+  list-style-type: none;
+}
+
+.item {
+  padding: 24px;
+  height: 246px;
+  background-color: #1c1c21;
+  border-radius: 40px;
+  margin-bottom: 24px;
+}
+
+.item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cost__wrapper {
+ display: flex;
+}
+
+

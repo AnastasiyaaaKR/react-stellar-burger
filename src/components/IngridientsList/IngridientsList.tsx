@@ -1,41 +1,45 @@
 import React from "react";
 import styles from "./IngridientsList.module.css";
 import Ingridient from "../Ingridient/Ingridient";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IIngredient } from "../../../types";
 
 interface IIngridientsListProps {
-  name: string, 
-  type: string, 
-  ingredients: IIngredient[]
-  showIngridientsModal: (item: IIngredient) => void,
+  name: string;
+  type: string;
+  ingredients: IIngredient[];
 }
 
 const IngridientsList = React.forwardRef<HTMLDivElement, IIngridientsListProps>(
-  ({ name, type, ingredients, showIngridientsModal }, ref) => {
+  ({ name, type, ingredients }, ref) => {
     const items = ingredients.filter((item) => {
       return item.type === type;
     });
+
+    const location = useLocation();
+
     return (
-      <div ref={ref} className={`${styles.IngridientsList__section} pl-4`}>
+      <div ref={ref} className="pl-4" >
         <p className="text text_type_main-medium mt-10">{name}</p>
-        <div className={`mb-10`}>
-          <div className={`${styles.IngridientsList}`}>
+        <ul className={`mb-10`}>
+          <li className={`${styles.IngridientsList}`}>
             {items.map((item) => {
               return (
-                <Link to={`/ingredients/${item._id}`} className={styles.IngridientsList__link}>
+                <Link
+                  to={`/ingredients/${item._id}`}
+                  state={{ background: location }}
+                  className={styles.IngridientsList__link}
+                  key={item._id}
+                >
                   <Ingridient
-                    showIngridientsModal={() => {
-                      showIngridientsModal(item);
-                    }}
                     item={item}
                     key={item._id}
                   />
                 </Link>
               );
             })}
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     );
   }

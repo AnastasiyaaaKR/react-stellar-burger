@@ -1,46 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Location } from 'react-router-dom'
 import styles from "./Main.module.css";
 import Content from "../../components/Content/Content";
 import OrderDetailsModal from "../../components/OrderDetailsModal/OrderDetailsModal";
 import IngredientDetailsModal from "../../components/IngredientDetailsModal/IngredientDetailsModal";
 import {
   selectIngridients,
-  fetchIngridients,
 } from "../../services/IngredientsSlice";
-import {
-  selectModalIngridient,
-  setModalIngredient,
-  deleteModalIngridient,
-} from "../../services/modalIngridientSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { IIngredient } from "../../../types";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../services/storage";
 
-function Main() {
-  const ingredients:  IIngredient[]= useSelector(selectIngridients);
-  const dispatch = useDispatch();
+interface IMainProps {
+  location: Location,
+}
+const getIngredientId = (location: Location): string | null => {
+  const { pathname } = location;
+  const match = pathname.match(/\/ingredients\/(.+)/);
+  if (!match) return null;
 
-  useEffect(() => {
-    dispatch(fetchIngridients());
-  }, []);
+  return match[1];
+}
 
+function Main({location}: IMainProps) {
+  const ingredients:  IIngredient[]= useAppSelector(selectIngridients);
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
+
+  const ingredientId = getIngredientId(location);
   const showOrderDetails = (): void => {
     setVisible(true);
   };
+
   const closeOrderDetails = (): void => {
     setVisible(false);
   };
 
-  const [fullInformation, setFullInformation] = useState(false);
-  const modalIngredient = useSelector(selectModalIngridient);
-  const showIngridientDetails = (item: IIngredient): void => {
-    setFullInformation(true);
-    dispatch(setModalIngredient(item));
-  };
+  const fullInformation = Boolean(getIngredientId(location));
 
   const closeIngridientDetails = (): void => {
-    setFullInformation(false);
-    dispatch(deleteModalIngridient());
+    navigate("/");
   };
 
   return (
@@ -48,11 +47,10 @@ function Main() {
       <Content
         ingredients={ingredients}
         showModal={showOrderDetails}
-        showIngridientsModal={showIngridientDetails}
       />
       <OrderDetailsModal visible={visible} closeModal={closeOrderDetails} />
-      {modalIngredient && (<IngredientDetailsModal
-        item={modalIngredient}
+      {ingredientId && (<IngredientDetailsModal
+        ingredientId={ingredientId}
         fullInformation={fullInformation}
         closeModal={closeIngridientDetails}
       />)}
