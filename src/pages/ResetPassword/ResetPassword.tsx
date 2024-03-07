@@ -13,13 +13,12 @@ import {
   selectPassword,
   selectToken,
 } from "../../services/resetPasswordSlice";
-import { useDispatch, useSelector } from "react-redux";
-import {AppDispatch} from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const ResetPassword = () => {
-  const dispatch = useDispatch() as AppDispatch;
-  const password: string = useSelector(selectPassword);
-  const token: string = useSelector(selectToken);
+  const dispatch = useAppDispatch();
+  const password: string = useAppSelector(selectPassword);
+  const token: string = useAppSelector(selectToken);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();

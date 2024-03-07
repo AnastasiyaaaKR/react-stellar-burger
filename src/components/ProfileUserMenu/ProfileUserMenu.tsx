@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./ProfileUserMenu.module.css";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logout } from "../../services/userSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../services/storage";
 
 const ProfileUserMenu = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const logoutUser: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();

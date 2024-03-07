@@ -3,7 +3,6 @@ import styles from "./ConstructorIngridient.module.css";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectConstructorIngridients,
   changeIngridients,
@@ -11,6 +10,7 @@ import {
 } from "../../services/constructorIngridientSlice";
 import { decrementCount } from "../../services/IngredientsSlice";
 import {IIngredient} from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 interface IConstructorIngridientProps {
   ingredient: IIngredient,
@@ -18,12 +18,12 @@ interface IConstructorIngridientProps {
 }
 
 const ConstructorIngridient = ({ ingredient, index }: IConstructorIngridientProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const deleteBurgerIngridient = (): void => {
     dispatch(removeIngridient(ingredient));
     dispatch(decrementCount(ingredient._id))
   };
-  const burgerArr: IIngredient[] = useSelector(selectConstructorIngridients);
+  const burgerArr: IIngredient[] = useAppSelector(selectConstructorIngridients);
   const findIndex = (item: IIngredient): number => {
     return burgerArr.indexOf(item);
   };

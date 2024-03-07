@@ -37,8 +37,6 @@ export interface IOrder {
   updatedAt: string,
 }
 
-export type AppDispatch = typeof storage.dispatch;
-
 export interface IOrders {
   success: boolean,
   orders: IOrder[],

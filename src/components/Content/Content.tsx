@@ -7,15 +7,13 @@ import { IIngredient } from "../../../types";
 interface IContentProps {
   ingredients: IIngredient[]
   showModal: () => void;
-  showIngridientsModal: (item:IIngredient) => void,
 }
 
-const Content = ({ ingredients, showModal, showIngridientsModal }: IContentProps) => {
+const Content = ({ ingredients, showModal }: IContentProps) => {
   return (
     <main className={styles.content__wrapper}>
       <BurgerIngridients
         ingredients={ingredients}
-        showIngridientsModal={showIngridientsModal}
       />
       <BurgerConstructor showModal={showModal} />
     </main>

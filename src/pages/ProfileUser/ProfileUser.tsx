@@ -18,16 +18,16 @@ import {
   selectprofileUserPassword,
   selectChanged,
 } from "../../services/userSlice";
-import { useSelector, useDispatch } from "react-redux";
 import ProfileUserMenu from "../../components/ProfileUserMenu/ProfileUserMenu";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const ProfileUser = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const name: string = useSelector(selectprofileUserName);
-  const email: string = useSelector(selectprofileUserEmail);
-  const password: string = useSelector(selectprofileUserPassword);
-  const changed = useSelector(selectChanged);
+  const name: string = useAppSelector(selectprofileUserName);
+  const email: string = useAppSelector(selectprofileUserEmail);
+  const password: string = useAppSelector(selectprofileUserPassword);
+  const changed = useAppSelector(selectChanged);
 
   React.useEffect(() => {
     dispatch(getUser());

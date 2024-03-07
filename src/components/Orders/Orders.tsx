@@ -3,7 +3,7 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IIngredient, IOrder } from "../../../types";
 import styles from "./Orders.module.css";
 import FeedIdDetailsModal from "../FeedIdDetailsModal/FeedIdDetailsModal";
@@ -12,22 +12,19 @@ interface IOrdersProps {
   orders: IOrder[];
   ingredients: IIngredient[];
   pathToOrder: string;
+  selectedOrderId: string | null;
 }
 
-const Orders = ({ orders, ingredients, pathToOrder }: IOrdersProps) => {
-  const [visible, setVisible] = useState(false);
-  const [order, setOrder] = useState<IOrder | null>(null);
+const Orders = ({ orders, ingredients, pathToOrder, selectedOrderId }: IOrdersProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const showOrderDetails = (item: IOrder): void => {
-    setVisible(true);
-    setOrder(item);
-  };
+  const visible = Boolean(selectedOrderId);
+  const order = orders.find((order) => order._id === selectedOrderId);
 
   const closeOrderDetails = (): void => {
-    setVisible(false);
+    navigate(location);
   };
-
-  const location = useLocation();
 
   function getIngredientById(id: string) {
     for (const ingredient of ingredients) {
@@ -69,9 +66,9 @@ const Orders = ({ orders, ingredients, pathToOrder }: IOrdersProps) => {
               to={`${pathToOrder}${order._id}`}
               className={styles.order__link}
               state={{ background: location }}
-              onClick={() => {
-                showOrderDetails(order);
-              }}
+              // onClick={() => {
+              //   showOrderDetails(order);
+              // }}
             >
               <div className={styles.order__wrapper}>
                 <div className={`${styles.order__header} pt-6`}>

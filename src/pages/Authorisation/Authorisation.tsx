@@ -13,13 +13,12 @@ import {
   selectPassword,
 } from "../../services/loginSlice";
 import { loginUser, setUser } from "../../services/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import {AppDispatch} from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const Authorisation = () => {
-  const dispatch = useDispatch() as AppDispatch;
-  const email: string = useSelector(selectEmail);
-  const password: string = useSelector(selectPassword);
+  const dispatch = useAppDispatch();
+  const email: string = useAppSelector(selectEmail);
+  const password: string = useAppSelector(selectPassword);
 
   const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(setEmail(e.target.value));

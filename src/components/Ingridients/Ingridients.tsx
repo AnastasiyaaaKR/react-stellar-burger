@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./Ingridients.module.css";
 import IngridientsList from "../IngridientsList/IngridientsList";
 import { useInView } from "react-intersection-observer";
 import { setCurrentType } from "../../services/IngredientsSlice";
-import { useDispatch } from "react-redux";
 import { IIngredient } from "../../../types";
+import { useAppDispatch } from "../../services/storage";
 
 interface IIngridientsProps {
   ingredients: IIngredient[], 
-  showIngridientsModal: (item: IIngredient) => void,
 }
 
-const Ingridients = ({ ingredients, showIngridientsModal }: IIngridientsProps) => {
+const Ingridients = ({ ingredients }: IIngridientsProps) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [bunsRef, inViewBuns] = useInView({ 
     threshold: 0,
   });
@@ -43,21 +42,18 @@ const Ingridients = ({ ingredients, showIngridientsModal }: IIngridientsProps) =
         ref={bunsRef}
         type="bun"
         name="Булки"
-        showIngridientsModal={showIngridientsModal}
       />
       <IngridientsList
         ingredients={ingredients}
         ref={saucesRef}
         type="sauce"
         name="Соусы"
-        showIngridientsModal={showIngridientsModal}
       />
       <IngridientsList
         ingredients={ingredients}
         ref={mainsRef}
         type="main"
         name="Начинки"
-        showIngridientsModal={showIngridientsModal}
       />
     </div>
   );

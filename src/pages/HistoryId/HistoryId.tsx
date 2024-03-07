@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo } from "react";
 import styles from "./HistoryId.module.css";
 import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import { IIngredient, IOrder } from "../../../types";
 import { selectOrders } from "../../services/orders/reducer";
 import {
-  fetchIngridients,
   selectIngridients,
 } from "../../services/IngredientsSlice";
 import {
@@ -13,23 +11,25 @@ import {
   disconnect as disconnectOrders,
 } from "../../services/orders/actions";
 import OrderHistoryContent from "../../components/OrderHistoryContent/OrderHistoryContent";
+import { wsBaseUrl } from "../../api";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const accessToken = localStorage.getItem("accessToken")?.replace('Bearer ','');
-const ordersServerUrl = `wss://norma.nomoreparties.space/orders?token=${accessToken}`;
+const ordersServerUrl = `${wsBaseUrl}?token=${accessToken}`;
 
 const HistoryId = () => {
-  const dispatch = useDispatch();
-  // const disconnect = () => dispatch(disconnectOrders());
+  const dispatch = useAppDispatch();
+  const disconnect = () => {
+    dispatch(disconnectOrders())
+  };
 
   useEffect(() => {
     dispatch(connectOrders(ordersServerUrl));
-    if (ingredients.length === 0) {
-      dispatch(fetchIngridients());
-    }
+    return disconnect;
   }, [dispatch]);
 
-  const orders = useSelector(selectOrders);
-  const ingredients: IIngredient[] = useSelector(selectIngridients);
+  const orders = useAppSelector(selectOrders);
+  const ingredients: IIngredient[] = useAppSelector(selectIngridients);
 
   const params = useParams();
 

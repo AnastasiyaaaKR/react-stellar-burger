@@ -1,11 +1,12 @@
 import { IIngredient } from "../types";
 
+export const wsBaseUrl = "wss://norma.nomoreparties.space/orders"
 const baseUrl = "https://norma.nomoreparties.space/api";
 const domenUrl = `${baseUrl}/ingredients`;
 const createOrderUrl = `${baseUrl}/orders`;
 const domenForgotPassword = `${baseUrl}/password-reset`;
 const domenResetPassword = `${baseUrl}/password-reset/reset`;
-const authUrl = "https://norma.nomoreparties.space/api/auth/";
+const authUrl = `${baseUrl}/auth/`;
 const registerUrl = `${authUrl}register`;
 const loginUrl = `${authUrl}login`;
 const tokenUrl = `${authUrl}token`;

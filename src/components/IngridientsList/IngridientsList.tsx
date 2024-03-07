@@ -8,11 +8,10 @@ interface IIngridientsListProps {
   name: string;
   type: string;
   ingredients: IIngredient[];
-  showIngridientsModal: (item: IIngredient) => void;
 }
 
 const IngridientsList = React.forwardRef<HTMLDivElement, IIngridientsListProps>(
-  ({ name, type, ingredients, showIngridientsModal }, ref) => {
+  ({ name, type, ingredients }, ref) => {
     const items = ingredients.filter((item) => {
       return item.type === type;
     });
@@ -30,9 +29,6 @@ const IngridientsList = React.forwardRef<HTMLDivElement, IIngridientsListProps>(
                   to={`/ingredients/${item._id}`}
                   state={{ background: location }}
                   className={styles.IngridientsList__link}
-                  onClick={() => {
-                    showIngridientsModal(item);
-                  }}
                   key={item._id}
                 >
                   <Ingridient

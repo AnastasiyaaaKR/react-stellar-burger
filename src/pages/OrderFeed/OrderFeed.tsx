@@ -1,45 +1,61 @@
 import React, { useEffect } from "react";
+import { Location } from "react-router-dom";
 import styles from "./OrderFeed.module.css";
 import {
   connect as connectOrders,
   disconnect as disconnectOrders,
 } from "../../services/orders/actions";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectOrders,
   selectTotal,
   selectTotalToday,
 } from "../../services/orders/reducer";
-import {
-  selectIngridients,
-  fetchIngridients,
-} from "../../services/IngredientsSlice";
+import { selectIngridients } from "../../services/IngredientsSlice";
 import { IIngredient } from "../../../types";
 import Orders from "../../components/Orders/Orders";
+import { wsBaseUrl } from "../../api";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
-const ordersServerUrl = "wss://norma.nomoreparties.space/orders/all";
+interface IOrderFeedProps {
+  location: Location;
+}
 
-const OrderFeed = () => {
-  const dispatch = useDispatch();
-  // const disconnect = () => dispatch(disconnectOrders());
+const ordersServerUrl = `${wsBaseUrl}/all`;
+
+const getOrderId = (location: Location): string | null => {
+  const { pathname } = location;
+  const match = pathname.match(/\/feed\/(.+)/);
+  if (!match) return null;
+
+  return match[1];
+};
+
+const OrderFeed = ({ location }: IOrderFeedProps) => {
+  const dispatch = useAppDispatch();
+  const disconnect = () => {
+    dispatch(disconnectOrders());
+  };
 
   useEffect(() => {
     dispatch(connectOrders(ordersServerUrl));
-    if (ingredients.length === 0) {
-      dispatch(fetchIngridients());
-    }
+    return disconnect;
   }, [dispatch]);
 
-  const ingredients: IIngredient[] = useSelector(selectIngridients);
-  const orders = useSelector(selectOrders);
-  const total = useSelector(selectTotal);
-  const totalToday = useSelector(selectTotalToday);
+  const ingredients: IIngredient[] = useAppSelector(selectIngridients);
+  const orders = useAppSelector(selectOrders);
+  const total = useAppSelector(selectTotal);
+  const totalToday = useAppSelector(selectTotalToday);
 
   return (
     <div className={styles.OrderFeed__wrapper}>
       <div className="mr-15">
         <h1 className="text text_type_main-medium mb-5">Лента заказов</h1>
-        <Orders orders={orders} ingredients={ingredients} pathToOrder={'/feed/'}/>
+        <Orders
+          orders={orders}
+          ingredients={ingredients}
+          pathToOrder={"/feed/"}
+          selectedOrderId={getOrderId(location)}
+        />
       </div>
       <div className={styles.info__wrapper}>
         <div className={`${styles.informationBoard} mb-15`}>
@@ -55,7 +71,10 @@ const OrderFeed = () => {
                 .slice(0, 10)
                 .map((order) => {
                   return (
-                    <li className={styles.informationBoard__text__inner} key={order._id}>
+                    <li
+                      className={styles.informationBoard__text__inner}
+                      key={order._id}
+                    >
                       {order.number}
                     </li>
                   );

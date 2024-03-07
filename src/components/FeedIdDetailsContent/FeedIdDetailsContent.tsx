@@ -5,8 +5,8 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
 import { selectIngridients } from "../../services/IngredientsSlice";
+import { useAppSelector } from "../../services/storage";
 
 interface IFeedIdDetailsContentProps {
   order: IOrder;
@@ -20,7 +20,7 @@ const FeedIdDetailsContent = ({
   showOrderNumber,
 }: IFeedIdDetailsContentProps) => {
 
-  const ingredients: IIngredient[] = useSelector(selectIngridients);
+  const ingredients: IIngredient[] = useAppSelector(selectIngridients);
 
   function getOrderStatusText(status: string) {
     if(status === 'done') {

@@ -1,43 +1,56 @@
 import React, { useEffect } from "react";
+import { Location } from "react-router-dom";
 import ProfileUserMenu from "../../components/ProfileUserMenu/ProfileUserMenu";
 import styles from "./OrdersHistury.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { IIngredient } from "../../../types";
-import { selectOrders} from "../../services/orders/reducer";
-import {
-  selectIngridients,
-  fetchIngridients,
-} from "../../services/IngredientsSlice";
+import { selectOrders } from "../../services/orders/reducer";
+import { selectIngridients } from "../../services/IngredientsSlice";
 import {
   connect as connectOrders,
   disconnect as disconnectOrders,
 } from "../../services/orders/actions";
 import Orders from "../../components/Orders/Orders";
+import { wsBaseUrl } from "../../api";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
-const accessToken = localStorage.getItem("accessToken")?.replace('Bearer ','');
-const ordersServerUrl = `wss://norma.nomoreparties.space/orders?token=${accessToken}`;
+const accessToken = localStorage.getItem("accessToken")?.replace("Bearer ", "");
+const ordersServerUrl = `${wsBaseUrl}?token=${accessToken}`;
 
+interface IOrdersHistoryProps {
+  location: Location;
+}
 
-const OrdersHistory = () => {
+const getOrderId = (location: Location): string | null => {
+  const { pathname } = location;
+  const match = pathname.match(/\/profile\/orders\/(.+)/);
+  if (!match) return null;
 
-  const dispatch = useDispatch();
+  return match[1];
+};
 
-  // const disconnect = () => dispatch(disconnectOrders());
+const OrdersHistory = ({ location }: IOrdersHistoryProps) => {
+  const dispatch = useAppDispatch();
+
+  const disconnect = () => {
+    dispatch(disconnectOrders());
+  };
 
   useEffect(() => {
     dispatch(connectOrders(ordersServerUrl));
-    if (ingredients.length === 0) {
-      dispatch(fetchIngridients());
-    }
+    return disconnect;
   }, [dispatch]);
 
-  const ingredients: IIngredient[] = useSelector(selectIngridients);
-  const orders = useSelector(selectOrders);
+  const ingredients = useAppSelector(selectIngridients);
+  const orders = useAppSelector(selectOrders);
 
   return (
     <div className={styles.OrdersHistory__wrapper}>
       <ProfileUserMenu />
-      <Orders orders={orders} ingredients={ingredients} pathToOrder={'/profile/orders/'}/>
+      <Orders
+        orders={orders}
+        ingredients={ingredients}
+        pathToOrder={"/profile/orders/"}
+        selectedOrderId={getOrderId(location)}
+      />
     </div>
   );
 };

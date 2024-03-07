@@ -19,6 +19,7 @@ import {
   wsMessage as OrdersWsNessage,
   wsError as OrdersWsError,
 } from "./orders/actions";
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -47,9 +48,17 @@ const wsActions = {
 
 const ordersMiddleware = socketMiddleware(wsActions);
 
-export default configureStore({
+const store = configureStore ({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(ordersMiddleware);
   },
 });
+
+export default store;
+
+export type AppDispatch = typeof store.dispatch;
+
+type DispatchFunc = () => AppDispatch;
+export const useAppDispatch: DispatchFunc = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

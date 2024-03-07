@@ -5,13 +5,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ForgotPassword.module.css";
 import { fetchEmail, setEmail, selectEmail } from "../../services/forgotPasswordSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../../types";
+import { useAppDispatch, useAppSelector } from "../../services/storage";
 
 const ForgotPassword = () => {
 
-  const dispatch = useDispatch() as AppDispatch;
-  const email: string = useSelector(selectEmail);
+  const dispatch = useAppDispatch();
+  const email: string = useAppSelector(selectEmail);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
