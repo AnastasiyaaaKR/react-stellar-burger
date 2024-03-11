@@ -3,7 +3,7 @@ import { createOrder as createOrderApi } from "../api";
 import { RootState } from "./storage";
 import { IOrder } from "../../types";
 
-type TinitialState = {
+export type TinitialState = {
   value: number;
   order: IOrder | null;
 };

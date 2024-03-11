@@ -3,7 +3,7 @@ import { getIngridients } from "../api";
 import { IIngredient } from "../../types";
 import { RootState } from "./storage";
 
-type TinitialState = {
+export type TinitialState = {
   value: IIngredient[],
   currentType: string,
 }

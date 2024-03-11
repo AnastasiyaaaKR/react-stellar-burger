@@ -9,7 +9,7 @@ import {
 import { ILoginUser, IUser } from "../../types";
 import { RootState } from "./storage";
 
-type TinitialState = {
+export type TinitialState = {
   user: IUser | null;
   profileUser: {
     name: string;

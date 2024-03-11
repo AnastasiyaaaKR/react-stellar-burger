@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IIngredient } from "../../types";
 import { RootState } from "./storage";
 
-type TinitialState = {
+export type TinitialState = {
    value: IIngredient | null,
 }
 
