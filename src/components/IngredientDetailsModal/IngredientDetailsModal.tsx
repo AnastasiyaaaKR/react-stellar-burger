@@ -1,13 +1,11 @@
 import React from "react";
 import Modal from "../Modal/Modal";
 import IngredientDetailsContent from "../IngredientDetailsContent/IngredientDetailsContent";
-// import {IIngredient} from "../../../types";
 import { useAppSelector } from "../../services/storage";
 import { selectIngridients } from "../../services/IngredientsSlice";
 
 interface IIngredientDetailsContentProps {
   ingredientId: string,
-  // item: IIngredient,
   fullInformation: boolean,
   closeModal: () => void,
 }
@@ -15,7 +13,6 @@ interface IIngredientDetailsContentProps {
 const IngredientDetailsModal = ({
   fullInformation,
   ingredientId,
-  // item,
   closeModal,
 }: IIngredientDetailsContentProps) => {
   const ingredients = useAppSelector(selectIngridients);
