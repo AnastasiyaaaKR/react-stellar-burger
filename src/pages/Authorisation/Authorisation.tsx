@@ -55,7 +55,7 @@ const Authorisation = () => {
       <form onSubmit={handleSubmit}>
         <EmailInput
           placeholder="E-mail"
-          extraClass="mb-6"
+          extraClass="mb-6 email__input"
           onChange={onChangeEmail}
           name="email"
           value={email}
@@ -64,9 +64,9 @@ const Authorisation = () => {
           onChange={onChangePassword}
           value={password}
           name="password"
-          extraClass="mb-6"
+          extraClass="mb-6 password__input"
         />
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium" extraClass="Authorization__button">
           Войти
         </Button>
       </form>

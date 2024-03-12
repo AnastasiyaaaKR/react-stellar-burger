@@ -115,4 +115,85 @@ describe("Тест userSlice reducer", () => {
       isAuthChecked: false,
     });
   });
+
+  it("Тест setName если user не null", () => {
+    const initState : TinitialState = {
+  user: {
+    name: "",
+    email: "",
+  },
+  profileUser: {
+    name: "",
+    email: "",
+    password: "",
+  },
+  isAuthChecked: false,
+}
+    const user = {
+      name: "Anastasiia",
+      email: "",
+    };
+    const action = setName(user.name);
+    const resultState = userSlice.reducer(initState, action);
+    expect(resultState).toEqual({
+      user: {
+        name: "Anastasiia",
+        email: "",
+      },
+      profileUser: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      isAuthChecked: false,
+    });
+  });
+
+  it("Тест setEmail если user null", () => {
+    const user = null;
+    const action = setEmail(user);
+    const resultState = userSlice.reducer(initStore, action);
+    expect(resultState).toEqual({
+      user: null,
+      profileUser: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      isAuthChecked: false,
+    });
+  });
+
+  it("Тест setEmail если user не null", () => {
+    const initState : TinitialState = {
+  user: {
+    name: "",
+    email: "",
+  },
+  profileUser: {
+    name: "",
+    email: "",
+    password: "",
+  },
+  isAuthChecked: false,
+}
+    const user = {
+      name: "",
+      email: "test@yandex.ru",
+    };
+    const action = setEmail(user.email);
+    const resultState = userSlice.reducer(initState, action);
+    expect(resultState).toEqual({
+      user: {
+        name: "",
+        email: "test@yandex.ru",
+      },
+      profileUser: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      isAuthChecked: false,
+    });
+  });
 });
