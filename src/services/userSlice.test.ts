@@ -8,17 +8,9 @@ import {
   resetData,
   userSlice,
   TinitialState,
+  initialState,
 } from "./userSlice";
-
-const initStore: TinitialState = {
-  user: null,
-  profileUser: {
-    name: "",
-    email: "",
-    password: "",
-  },
-  isAuthChecked: false,
-};
+import { testPassword, testName, testEmail } from "../utils/constants";
 
 describe("Тест userSlice reducer", () => {
   it("Тест setUser", () => {
@@ -28,7 +20,7 @@ describe("Тест userSlice reducer", () => {
       password: "993938",
     };
     const action = setUser(user);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: {
         name: "Nastya",
@@ -46,16 +38,16 @@ describe("Тест userSlice reducer", () => {
 
   it("Тест setProfileName", () => {
     const profileUser = {
-      name: "Anastasiia",
+      name: testName,
       email: "",
       password: "",
     };
     const action = setProfileName(profileUser.name);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: null,
       profileUser: {
-        name: "Anastasiia",
+        name: testName,
         email: "",
         password: "",
       },
@@ -66,16 +58,16 @@ describe("Тест userSlice reducer", () => {
   it("Тест setProfileEmail", () => {
     const profileUser = {
       name: "",
-      email: "test@yandex.ru",
+      email: testEmail,
       password: "",
     };
     const action = setProfileEmail(profileUser.email);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: null,
       profileUser: {
         name: "",
-        email: "test@yandex.ru",
+        email: testEmail,
         password: "",
       },
       isAuthChecked: false,
@@ -86,16 +78,16 @@ describe("Тест userSlice reducer", () => {
     const profileUser = {
       name: "",
       email: "",
-      password: "112233",
+      password: testPassword,
     };
     const action = setProfilePassword(profileUser.password);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: null,
       profileUser: {
         name: "",
         email: "",
-        password: "112233",
+        password: testPassword,
       },
       isAuthChecked: false,
     });
@@ -104,7 +96,7 @@ describe("Тест userSlice reducer", () => {
   it("Тест setName если user null", () => {
     const user = null;
     const action = setName(user);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: null,
       profileUser: {
@@ -130,14 +122,14 @@ describe("Тест userSlice reducer", () => {
   isAuthChecked: false,
 }
     const user = {
-      name: "Anastasiia",
+      name: testName,
       email: "",
     };
     const action = setName(user.name);
     const resultState = userSlice.reducer(initState, action);
     expect(resultState).toEqual({
       user: {
-        name: "Anastasiia",
+        name: testName,
         email: "",
       },
       profileUser: {
@@ -152,7 +144,7 @@ describe("Тест userSlice reducer", () => {
   it("Тест setEmail если user null", () => {
     const user = null;
     const action = setEmail(user);
-    const resultState = userSlice.reducer(initStore, action);
+    const resultState = userSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       user: null,
       profileUser: {
@@ -179,14 +171,14 @@ describe("Тест userSlice reducer", () => {
 }
     const user = {
       name: "",
-      email: "test@yandex.ru",
+      email: testEmail,
     };
     const action = setEmail(user.email);
     const resultState = userSlice.reducer(initState, action);
     expect(resultState).toEqual({
       user: {
         name: "",
-        email: "test@yandex.ru",
+        email: testEmail,
       },
       profileUser: {
         name: "",

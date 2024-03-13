@@ -3,21 +3,23 @@ import { getIngridients } from "../api";
 import { IIngredient } from "../../types";
 import { RootState } from "./storage";
 
-export type TinitialState = {
-  value: IIngredient[],
-  currentType: string,
-}
+type TinitialState = {
+  value: IIngredient[];
+  currentType: string;
+};
+
+export const initialState = {
+  value: [],
+  currentType: "bun",
+} as TinitialState;
 
 export const ingredientsSlice = createSlice({
   name: "ingredients",
-  initialState: {
-    value: [],
-    currentType: "bun",
-  } as TinitialState,
+  initialState,
   reducers: {
     incrementCount: (state, action) => {
       const el = state.value.find((el) => el._id === action.payload);
-      if(el) {
+      if (el) {
         el.__v += 1;
       }
     },
@@ -28,13 +30,13 @@ export const ingredientsSlice = createSlice({
           ingredient.__v = 0;
         }
       }
-      if(el) {
+      if (el) {
         el.__v = 1;
       }
     },
     decrementCount: (state, action) => {
       const el = state.value.find((el) => el._id === action.payload);
-      if(el){
+      if (el) {
         el.__v -= 1;
       }
     },
@@ -66,5 +68,6 @@ export const {
 } = ingredientsSlice.actions;
 
 export const selectIngridients = (state: RootState) => state.ingredients.value;
-export const selectCurrentType = (state: RootState) => state.ingredients.currentType;
+export const selectCurrentType = (state: RootState) =>
+  state.ingredients.currentType;
 export default ingredientsSlice.reducer;

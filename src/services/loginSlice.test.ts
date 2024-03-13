@@ -1,27 +1,23 @@
-import { setEmail, setPassword, loginSlice } from "./loginSlice";
-
-const initStore = {
-   email: "",
-   password: "",
-};
+import { setEmail, setPassword, loginSlice, initialState } from "./loginSlice";
+import { testEmail, testPassword } from "../utils/constants";
 
 describe("Тест loginSlice reducer", () => {
   it("Тест setEmail", () => {
-    const email = "email@test.ru";
+    const email = testEmail;
     const action = setEmail(email);
-    const resultState = loginSlice.reducer(initStore, action);
+    const resultState = loginSlice.reducer(initialState, action);
     expect(resultState).toEqual({
-      email: "email@test.ru",
+      email: testEmail,
       password: "",
     });
   });
 
   it("Тест setPassword", () => {
-    const password = '12345';
+    const password = testPassword;
     const action = setPassword(password);
-    const resultState = loginSlice.reducer(initStore, action);
+    const resultState = loginSlice.reducer(initialState, action);
     expect(resultState).toEqual({
-      password: '12345', 
+      password: testPassword, 
       email: '',
     });
   });

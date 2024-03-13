@@ -3,45 +3,41 @@ import {
   setPassword,
   setName,
   registrationSlice,
+  initialState,
 } from "./registrationSlice";
-
-const initStore = {
-  email: "",
-  password: "",
-  name: "",
-};
+import { testEmail, testPassword, testName } from "../utils/constants";
 
 describe("Тест registrationSlice reducer", () => {
   it("Тест setEmail", () => {
-    const email = "email@test.ru";
+    const email = testEmail;
     const action = setEmail(email);
-    const resultState = registrationSlice.reducer(initStore, action);
+    const resultState = registrationSlice.reducer(initialState, action);
     expect(resultState).toEqual({
-      email: "email@test.ru",
+      email: testEmail,
       password: "",
       name: "",
     });
   });
 
   it("Тест setPassword", () => {
-    const password = "112233";
+    const password = testPassword;
     const action = setPassword(password);
-    const resultState = registrationSlice.reducer(initStore, action);
+    const resultState = registrationSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       email: "",
-      password: "112233",
+      password: testPassword,
       name: "",
     });
   });
 
   it("Тест setName", () => {
-    const name = "Nastya";
+    const name = testName;
     const action = setName(name);
-    const resultState = registrationSlice.reducer(initStore, action);
+    const resultState = registrationSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       email: "",
       password: "",
-      name: "Nastya",
+      name: testName,
     });
   });
 });

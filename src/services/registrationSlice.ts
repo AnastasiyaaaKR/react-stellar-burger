@@ -3,13 +3,15 @@ import { registration } from "../api";
 import { IUser } from "../../types";
 import { RootState } from "./storage";
 
+export const initialState = {
+  email: "",
+  password: "",
+  name: "",
+};
+
 export const registrationSlice = createSlice({
   name: "registration",
-  initialState: {
-    email: '',
-    password: '',
-    name: '',
-  },
+  initialState,
   reducers: {
     setEmail: (state, action) => {
       state.email = action.payload;
@@ -20,12 +22,12 @@ export const registrationSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
-  }
-})
+  },
+});
 
 export const registerUser = createAsyncThunk(
   "registration/registerUser",
-  ({email, password, name}: Required<IUser>) => {
+  ({ email, password, name }: Required<IUser>) => {
     return registration(email, password, name);
   }
 );
@@ -36,6 +38,6 @@ export const selectPassword = (state: RootState) => state.registration.password;
 
 export const selectName = (state: RootState) => state.registration.name;
 
-export const { setEmail, setPassword, setName} = registrationSlice.actions;
+export const { setEmail, setPassword, setName } = registrationSlice.actions;
 
 export default registrationSlice.reducer;

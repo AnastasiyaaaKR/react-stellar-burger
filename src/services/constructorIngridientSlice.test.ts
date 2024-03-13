@@ -1,6 +1,7 @@
 import { IIngredient } from "../../types";
 import {
   TinitialState,
+  initialState,
   addNewIngridient,
   cleanBurgerIngridients,
   constructorIngridientSlice,
@@ -9,11 +10,6 @@ import {
   changeIngridients,
   removeIngridient,
 } from "./constructorIngridientSlice";
-
-const initStore: TinitialState = {
-  bun: null,
-  ingridients: [],
-};
 
 describe("Тест constructorIngridients reducer", () => {
   it("Тест setConstructorIngridients", () => {
@@ -35,7 +31,7 @@ describe("Тест constructorIngridients reducer", () => {
       },
     ];
     const action = setConstructorIngridients(ingridients);
-    const resultState = constructorIngridientSlice.reducer(initStore, action);
+    const resultState = constructorIngridientSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       bun: null,
       ingridients: [
@@ -75,7 +71,7 @@ describe("Тест constructorIngridients reducer", () => {
       __v: 0,
     };
     const action = addNewIngridient(ingridient);
-    const resultState = constructorIngridientSlice.reducer(initStore, action);
+    const resultState = constructorIngridientSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       bun: null,
       ingridients: [
@@ -159,7 +155,7 @@ describe("Тест constructorIngridients reducer", () => {
     };
     const ingridients = [];
     const action = setBun(bun);
-    const resultState = constructorIngridientSlice.reducer(initStore, action);
+    const resultState = constructorIngridientSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       bun: {
         _id: "123",

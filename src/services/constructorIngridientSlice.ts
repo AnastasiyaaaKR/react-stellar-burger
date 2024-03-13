@@ -2,17 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IIngredient } from "../../types";
 import { RootState } from "./storage";
 
-export type TinitialState = {
-  bun: IIngredient | null,
-  ingridients: IIngredient[],
-}
+type TinitialState = {
+  bun: IIngredient | null;
+  ingridients: IIngredient[];
+};
+
+export const initialState = {
+  bun: null,
+  ingridients: [],
+} as TinitialState;
 
 export const constructorIngridientSlice = createSlice({
   name: "constructorIngridients",
-  initialState: {
-    bun: null,
-    ingridients: [],
-  } as TinitialState,
+  initialState,
   reducers: {
     setConstructorIngridients: (state, action) => {
       state.ingridients = action.payload;
@@ -37,13 +39,14 @@ export const constructorIngridientSlice = createSlice({
     cleanBurgerIngridients: (state) => {
       state.ingridients = [];
       state.bun = null;
-    }, 
+    },
   },
 });
 
 export const selectConstructorIngridients = (state: RootState) =>
   state.constructorIngridients.ingridients;
-export const selectConstructorBun = (state: RootState) => state.constructorIngridients.bun;
+export const selectConstructorBun = (state: RootState) =>
+  state.constructorIngridients.bun;
 export const {
   setConstructorIngridients,
   addNewIngridient,

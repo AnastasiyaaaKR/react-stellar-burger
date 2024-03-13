@@ -3,17 +3,19 @@ import { createOrder as createOrderApi } from "../api";
 import { RootState } from "./storage";
 import { IOrder } from "../../types";
 
-export type TinitialState = {
+type TinitialState = {
   value: number;
   order: IOrder | null;
 };
 
+export const initialState = {
+  value: 0,
+  order: null,
+} as TinitialState;
+
 export const orderNumberSlice = createSlice({
   name: "orderNumber",
-  initialState: {
-    value: 0,
-    order: null,
-  } as TinitialState,
+  initialState,
   reducers: {
     setOrderNumber: (state, action) => {
       state.value = action.payload;

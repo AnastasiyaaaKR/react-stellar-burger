@@ -2,31 +2,28 @@ import {
   setToken,
   setPassword,
   resetPasswordSlice,
+  initialState,
 } from "./resetPasswordSlice";
-
-const initStore = {
-  token: "",
-  password: "",
-};
+import { testPassword, testToken } from "../utils/constants";
 
 describe("Тест resetPasswordSlice reducer", () => {
   it("Тест setToken", () => {
-    const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGM3MzI3ODc4OTljMDAxYjgyNWQ1MSIsImlhdCI6MTcxMDAwMTE2MiwiZXhwIjoxNzEwMDAyMzYyfQ.Mkt5rYMBRQ9EWS7_zn-v_Z4XwxI5Idda-c_TTd446oE";
+    const token = testToken;
     const action = setToken(token);
-    const resultState = resetPasswordSlice.reducer(initStore, action);
+    const resultState = resetPasswordSlice.reducer(initialState, action);
     expect(resultState).toEqual({
-      token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGM3MzI3ODc4OTljMDAxYjgyNWQ1MSIsImlhdCI6MTcxMDAwMTE2MiwiZXhwIjoxNzEwMDAyMzYyfQ.Mkt5rYMBRQ9EWS7_zn-v_Z4XwxI5Idda-c_TTd446oE",
+      token: testToken,
       password: "",
     });
   });
 
   it("Тест setPassword", () => {
-    const password = '112233'
+    const password = testPassword;
     const action = setPassword(password);
-    const resultState = resetPasswordSlice.reducer(initStore, action);
+    const resultState = resetPasswordSlice.reducer(initialState, action);
     expect(resultState).toEqual({
       token: "",
-      password: "112233",
+      password: testPassword,
     });
   });
 });
