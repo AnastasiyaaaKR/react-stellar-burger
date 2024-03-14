@@ -1,6 +1,8 @@
+const baseUrl = "http://localhost:3000/";
+
 describe("тестируем работу приложения", () => {
   it("Тестируем авторизацию", () => {
-    cy.visit(`http://localhost:3000/login`);
+    cy.visit(`${baseUrl}login`);
     cy.intercept('GET','/user', {fixture: "profileData.json"})
     cy.get(".email__input").contains("E-mail").type("test@email.com");
     cy.get(".password__input").type("112233");
@@ -8,7 +10,7 @@ describe("тестируем работу приложения", () => {
   });
 
   it("тестируем открытие страницы и создание заказа", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit(baseUrl);
     cy.intercept('GET','/ingredients/', {fixture: "ingredients.json"})
     cy.get("div").contains("0").as("BurgerConstructor");
     cy.get("li")
@@ -41,7 +43,7 @@ describe("тестируем работу приложения", () => {
   });
 
   it("Тестируем открытие попапа ингредиентов", () => {
-    cy.visit(`http://localhost:3000/`);
+    cy.visit(baseUrl);
     cy.intercept('GET','/ingredients/', {fixture: "ingredients.json"})
     cy.get("li").contains("Краторная булка N-200i").click();
     cy.contains("Детали ингредиента");
