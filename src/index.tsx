@@ -13,7 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <DndProvider backend={HTML5Backend} >
       <Provider store={storage}>
-      <BrowserRouter>
+      <BrowserRouter basename="/react-stellar-burger">
         <App />
       </BrowserRouter>
     </Provider>
