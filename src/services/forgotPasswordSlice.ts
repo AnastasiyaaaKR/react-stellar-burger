@@ -2,11 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { forgotPassword } from "../api";
 import { RootState } from "./storage";
 
+export const initialState = {
+  value: "",
+};
+
 export const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
-  initialState: {
-    value: '',
-  },
+  initialState,
   reducers: {
     setEmail: (state, action) => {
       state.value = action.payload;
@@ -14,11 +16,10 @@ export const forgotPasswordSlice = createSlice({
   },
 });
 
-
 export const fetchEmail = createAsyncThunk(
   "forgotPassword/forgotPassword",
   (email: string) => {
-    return forgotPassword(email)
+    return forgotPassword(email);
   }
 );
 

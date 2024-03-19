@@ -13,7 +13,6 @@ import OrderFeed from "../../pages/OrderFeed/OrderFeed";
 import OrdersHistory from "../../pages/OrdersHistory/OrdersHistory";
 import FeedId from "../../pages/FeedId/FeedId";
 import HistoryId from "../../pages/HistoryId/HistoryId";
-// import OrderAccpetedFullPage from "../../pages/OrderAccpetedFullPage/OrderAccpetedFullPage";
 import { OnlyAuth, OnlyUnAuth } from "../ProtectedRoute/ProtectedRoute";
 import { getUser } from "../../services/userSlice";
 import { fetchIngridients } from "../../services/IngredientsSlice";
@@ -46,7 +45,6 @@ const App = () => {
           <Route path="/ingredients/:id" element={<IngredientPage />} />
           <Route path="/feed/:id" element={<FeedId />} />
           <Route path="/profile/orders/:id" element={<HistoryId />} />
-          {/* <Route path="/order/:id" element={<OrderAccpetedFullPage />} /> */}
         </Route>
       </Routes>
   );

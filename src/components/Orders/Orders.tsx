@@ -66,9 +66,6 @@ const Orders = ({ orders, ingredients, pathToOrder, selectedOrderId }: IOrdersPr
               to={`${pathToOrder}${order._id}`}
               className={styles.order__link}
               state={{ background: location }}
-              // onClick={() => {
-              //   showOrderDetails(order);
-              // }}
             >
               <div className={styles.order__wrapper}>
                 <div className={`${styles.order__header} pt-6`}>

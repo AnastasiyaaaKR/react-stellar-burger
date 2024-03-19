@@ -8,12 +8,14 @@ type TinitialState = {
   order: IOrder | null;
 };
 
+export const initialState = {
+  value: 0,
+  order: null,
+} as TinitialState;
+
 export const orderNumberSlice = createSlice({
   name: "orderNumber",
-  initialState: {
-    value: 0,
-    order: null,
-  } as TinitialState,
+  initialState,
   reducers: {
     setOrderNumber: (state, action) => {
       state.value = action.payload;

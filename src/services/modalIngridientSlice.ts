@@ -3,14 +3,16 @@ import { IIngredient } from "../../types";
 import { RootState } from "./storage";
 
 type TinitialState = {
-   value: IIngredient | null,
-}
+  value: IIngredient | null;
+};
+
+export const initialState = {
+  value: null,
+} as TinitialState;
 
 export const modalIngridientSlice = createSlice({
   name: "modalIngridient",
-  initialState: {
-    value: null,
-  } as TinitialState,
+  initialState,
   reducers: {
     setModalIngredient: (state, action) => {
       state.value = action.payload;
@@ -21,7 +23,8 @@ export const modalIngridientSlice = createSlice({
   },
 });
 
-export const selectModalIngridient = (state: RootState) => state.modalIngridient.value;
+export const selectModalIngridient = (state: RootState) =>
+  state.modalIngridient.value;
 export const { setModalIngredient, deleteModalIngridient } =
   modalIngridientSlice.actions;
 export default modalIngridientSlice.reducer;

@@ -9,7 +9,7 @@ import {
 import { ILoginUser, IUser } from "../../types";
 import { RootState } from "./storage";
 
-type TinitialState = {
+export type TinitialState = {
   user: IUser | null;
   profileUser: {
     name: string;
@@ -19,17 +19,19 @@ type TinitialState = {
   isAuthChecked: boolean;
 };
 
+export const initialState = {
+  user: null,
+  profileUser: {
+    name: "",
+    email: "",
+    password: "",
+  },
+  isAuthChecked: false,
+} as TinitialState;
+
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    user: null,
-    profileUser: {
-      name: "",
-      email: "",
-      password: "",
-    },
-    isAuthChecked: false,
-  } as TinitialState,
+  initialState,
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
