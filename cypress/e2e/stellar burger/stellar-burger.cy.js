@@ -1,8 +1,8 @@
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "http://localhost:3000/react-stellar-burger";
 
 describe("тестируем работу приложения", () => {
   it("Тестируем авторизацию", () => {
-    cy.visit(`${baseUrl}login`);
+    cy.visit(`${baseUrl}/login`);
     cy.intercept('GET','/user', {fixture: "profileData.json"})
     cy.get(".email__input").contains("E-mail").type("test@email.com");
     cy.get(".password__input").type("112233");
